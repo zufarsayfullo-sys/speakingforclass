@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speak Up · Communication | Letters vs Texts</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -20,8 +20,8 @@
             overflow-x: hidden;
         }
 
-        /* Split background - Vintage vs Digital */
-        .split-bg {
+        /* Animated Photo Backgrounds - Split Screen with Zoom Effect */
+        .photo-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -31,51 +31,101 @@
             z-index: 0;
         }
 
-        .vintage-side {
+        /* Left Side - Vintage Letter Photo */
+        .vintage-photo {
             flex: 1;
-            background: linear-gradient(135deg, #2a1810 0%, #1a0f0a 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .vintage-side::before {
+        .vintage-photo::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="rgba(255,200,150,0.04)" d="M10,10 L30,10 L30,30 L10,30 Z M40,40 L60,40 L60,60 L40,60 Z M70,70 L90,70 L90,90 L70,90 Z"/></svg>');
-            background-size: 60px 60px;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&h=1000&fit=crop');
+            background-size: cover;
+            background-position: center;
+            animation: zoomSlow 20s ease-in-out infinite alternate;
+            filter: brightness(0.25) sepia(0.3);
         }
 
-        .digital-side {
+        /* Right Side - Modern Phone/Text Photo */
+        .digital-photo {
             flex: 1;
-            background: linear-gradient(135deg, #0a0e27 0%, #060914 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .digital-side::before {
+        .digital-photo::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0, 255, 255, 0.04) 2px,
-                rgba(0, 255, 255, 0.04) 4px
-            );
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=1000&fit=crop');
+            background-size: cover;
+            background-position: center;
+            animation: zoomSlow 25s ease-in-out infinite alternate-reverse;
+            filter: brightness(0.3) hue-rotate(10deg);
+        }
+
+        @keyframes zoomSlow {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.15);
+            }
+        }
+
+        /* Overlay gradient for better text readability */
+        .vintage-photo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(42, 24, 16, 0.85), rgba(26, 15, 10, 0.9));
+            z-index: 1;
+        }
+
+        .digital-photo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.85), rgba(6, 9, 20, 0.9));
+            z-index: 1;
+        }
+
+        /* Floating animated elements */
+        .floating-paper {
+            position: fixed;
+            font-size: 3rem;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatAround 15s ease-in-out infinite;
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -30px) rotate(5deg); }
+            50% { transform: translate(-10px, -50px) rotate(-3deg); }
+            75% { transform: translate(15px, -20px) rotate(4deg); }
         }
 
         /* Main container */
         .container {
             position: relative;
-            z-index: 10;
+            z-index: 20;
             max-width: 1300px;
             margin: 0 auto;
             padding: 1.5rem;
@@ -88,23 +138,23 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
-            padding: 1rem 1.5rem;
-            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem 1.8rem;
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(20px);
-            border-radius: 60px;
-            border: 1px solid rgba(255, 193, 7, 0.2);
+            border-radius: 80px;
+            border: 1px solid rgba(255, 193, 7, 0.3);
             flex-wrap: wrap;
             gap: 1rem;
         }
 
         .back-btn {
-            background: rgba(255, 193, 7, 0.15);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            padding: 0.6rem 1.3rem;
-            border-radius: 40px;
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.4);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
             color: #ffc107;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s;
             display: inline-flex;
             align-items: center;
@@ -119,7 +169,7 @@
         }
 
         .topic-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             background: linear-gradient(135deg, #ffc107, #ff8f00);
             -webkit-background-clip: text;
@@ -127,55 +177,57 @@
             color: transparent;
         }
 
-        /* Timer Section */
+        /* Timer Section - BIGGER */
         .timer-section {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 0.4rem 1.2rem;
-            border-radius: 60px;
-            border: 1px solid rgba(255, 193, 7, 0.3);
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem 1.5rem;
+            border-radius: 80px;
+            border: 1px solid rgba(255, 193, 7, 0.4);
         }
 
         .timer-display {
             font-family: 'Space Grotesk', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             color: #ffc107;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
         .timer-btn {
-            background: rgba(255, 193, 7, 0.2);
+            background: rgba(255, 193, 7, 0.25);
             border: none;
-            padding: 0.4rem 0.9rem;
-            border-radius: 40px;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
             color: #ffc107;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.8rem;
+            font-weight: 700;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
 
         .timer-btn:hover {
             background: #ffc107;
             color: #000;
+            transform: scale(1.02);
         }
 
-        /* Theme Header */
+        /* Theme Header - Enhanced */
         .theme-header {
             text-align: center;
-            margin: 2rem 0 3rem;
+            margin: 2rem 0 2.5rem;
         }
 
         .theme-header h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, #ffc107, #ff8f00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-shadow: 0 0 30px rgba(255, 193, 7, 0.3);
         }
 
         .contrast-line {
@@ -188,68 +240,75 @@
 
         .vintage-badge {
             font-family: 'Caveat', cursive;
-            font-size: 1.3rem;
-            color: #d4a574;
-            background: rgba(180, 120, 80, 0.2);
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
+            font-size: 1.4rem;
+            color: #e8b88a;
+            background: rgba(232, 184, 138, 0.15);
+            padding: 0.4rem 1.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(10px);
         }
 
         .vs {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #ffc107;
-            font-weight: 700;
+            font-weight: 800;
+            background: rgba(0,0,0,0.5);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
         }
 
         .digital-badge {
             font-family: 'Space Grotesk', monospace;
-            font-size: 1rem;
-            color: #00e5ff;
-            background: rgba(0, 229, 255, 0.15);
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
+            font-size: 1.1rem;
+            color: #5ee0fa;
+            background: rgba(94, 224, 250, 0.15);
+            padding: 0.4rem 1.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(10px);
             letter-spacing: 1px;
         }
 
         /* Roles Section */
         .roles-section {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 60px;
-            padding: 0.7rem 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            padding: 0.8rem 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
-            border: 1px solid rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.25);
         }
 
         .role {
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.08);
             cursor: pointer;
             transition: all 0.2s;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1rem;
         }
 
         .role.active {
             background: #ffc107;
             color: #000;
-            font-weight: 700;
+            font-weight: 800;
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
         }
 
         .swap-btn {
             background: rgba(255, 193, 7, 0.2);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
+            border: 1px solid rgba(255, 193, 7, 0.4);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
             color: #ffc107;
             cursor: pointer;
             transition: all 0.2s;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .swap-btn:hover {
@@ -257,7 +316,7 @@
             color: #000;
         }
 
-        /* Questions Grid - Split Design */
+        /* Questions Grid - Split Design with BETTER VISIBILITY */
         .questions-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -265,117 +324,155 @@
             margin: 2rem 0;
         }
 
-        /* Vintage Column */
+        /* Vintage Column - Enhanced */
         .vintage-col {
-            background: rgba(42, 24, 16, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(42, 24, 16, 0.85);
+            backdrop-filter: blur(12px);
             border-radius: 32px;
-            padding: 1.5rem;
-            border: 1px solid rgba(212, 165, 116, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border: 1px solid rgba(232, 184, 138, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .vintage-col:hover {
+            transform: translateY(-5px);
+            border-color: #e8b88a;
         }
 
         .vintage-header {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 2px dashed #d4a574;
+            border-bottom: 2px solid #e8b88a;
         }
 
         .vintage-header .icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         .vintage-header h3 {
             font-family: 'Caveat', cursive;
-            font-size: 1.8rem;
-            color: #d4a574;
+            font-size: 2rem;
+            color: #e8b88a;
+            margin-top: 0.5rem;
         }
 
         .vintage-header p {
-            font-size: 0.8rem;
-            color: #b8956a;
+            font-size: 0.85rem;
+            color: #c9a575;
         }
 
-        /* Digital Column */
+        /* Digital Column - Enhanced */
         .digital-col {
-            background: rgba(10, 14, 39, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 39, 0.85);
+            backdrop-filter: blur(12px);
             border-radius: 32px;
-            padding: 1.5rem;
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border: 1px solid rgba(94, 224, 250, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .digital-col:hover {
+            transform: translateY(-5px);
+            border-color: #5ee0fa;
         }
 
         .digital-header {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid #00e5ff;
+            border-bottom: 2px solid #5ee0fa;
         }
 
         .digital-header .icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); text-shadow: 0 0 10px #5ee0fa; }
         }
 
         .digital-header h3 {
             font-family: 'Space Grotesk', monospace;
-            font-size: 1.5rem;
-            color: #00e5ff;
+            font-size: 1.8rem;
+            color: #5ee0fa;
+            margin-top: 0.5rem;
         }
 
         .digital-header p {
-            font-size: 0.8rem;
-            color: #6c8eff;
+            font-size: 0.85rem;
+            color: #8a9eff;
         }
 
-        /* Question Cards */
+        /* Question Cards - MUCH MORE VISIBLE */
         .question-item {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
-            padding: 1.2rem;
-            margin-bottom: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid transparent;
         }
 
+        .vintage-col .question-item {
+            background: rgba(0, 0, 0, 0.7);
+            border-left: 4px solid #e8b88a;
+        }
+
         .vintage-col .question-item:hover {
-            border-color: #d4a574;
-            background: rgba(212, 165, 116, 0.1);
-            transform: translateX(5px);
+            border-color: #e8b88a;
+            background: rgba(232, 184, 138, 0.15);
+            transform: translateX(8px);
+        }
+
+        .digital-col .question-item {
+            background: rgba(0, 0, 0, 0.7);
+            border-left: 4px solid #5ee0fa;
         }
 
         .digital-col .question-item:hover {
-            border-color: #00e5ff;
-            background: rgba(0, 229, 255, 0.05);
-            transform: translateX(5px);
+            border-color: #5ee0fa;
+            background: rgba(94, 224, 250, 0.1);
+            transform: translateX(8px);
         }
 
         .question-item.completed {
-            background: rgba(255, 193, 7, 0.1);
+            background: rgba(255, 193, 7, 0.15);
             border-left: 4px solid #ffc107;
         }
 
         .question-part {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
         }
 
         .vintage-col .question-part {
-            color: #d4a574;
+            color: #e8b88a;
         }
 
         .digital-col .question-part {
-            color: #00e5ff;
+            color: #5ee0fa;
         }
 
         .question-text {
-            font-size: 1rem;
-            line-height: 1.5;
-            font-weight: 500;
+            font-size: 1.2rem;
+            line-height: 1.55;
+            font-weight: 600;
+            color: #fff;
         }
 
         /* Progress Section */
@@ -384,47 +481,50 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 2rem;
-            padding: 1rem 1.5rem;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 60px;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
             flex-wrap: wrap;
             gap: 1rem;
         }
 
         .progress-dots {
             display: flex;
-            gap: 0.8rem;
+            gap: 1rem;
         }
 
         .dot {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
+            width: 45px;
+            height: 45px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-weight: 700;
+            font-size: 1rem;
         }
 
         .dot.completed {
             background: #ffc107;
             color: #000;
-            font-weight: bold;
+            font-weight: 800;
+            transform: scale(1.05);
         }
 
         .reset-progress {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            color: #888;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            color: #aaa;
             cursor: pointer;
             transition: all 0.2s;
+            font-weight: 600;
         }
 
         .reset-progress:hover {
@@ -439,21 +539,33 @@
                 gap: 1.5rem;
             }
             .timer-display {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             .nav {
                 flex-direction: column;
+            }
+            .theme-header h2 {
+                font-size: 1.8rem;
+            }
+            .question-text {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- Split Background -->
-<div class="split-bg">
-    <div class="vintage-side"></div>
-    <div class="digital-side"></div>
+<!-- Animated Photo Backgrounds -->
+<div class="photo-bg">
+    <div class="vintage-photo"></div>
+    <div class="digital-photo"></div>
 </div>
+
+<!-- Floating animated elements -->
+<div class="floating-paper" style="top: 10%; left: 5%;">✍️📜</div>
+<div class="floating-paper" style="top: 70%; left: 15%; animation-duration: 18s;">💌✉️</div>
+<div class="floating-paper" style="top: 30%; right: 8%; animation-duration: 12s;">📱💬</div>
+<div class="floating-paper" style="bottom: 15%; right: 20%; animation-duration: 20s;">📲✨</div>
 
 <div class="container">
     <!-- Navigation -->
@@ -469,11 +581,11 @@
 
     <!-- Theme Header -->
     <div class="theme-header">
-        <h2>Handwritten Letters <span style="color:#ffc107">✧</span> Text Messages</h2>
+        <h2>✍️ Handwritten Letters <span style="color:#ffc107">✦</span> 📱 Text Messages</h2>
         <div class="contrast-line">
-            <span class="vintage-badge">✍️ vintage warmth</span>
+            <span class="vintage-badge">🖋️ vintage warmth · personal touch</span>
             <span class="vs">VS</span>
-            <span class="digital-badge">📱 digital speed</span>
+            <span class="digital-badge">⚡ digital speed · instant connect</span>
         </div>
     </div>
 
@@ -489,34 +601,34 @@
         <!-- Vintage Column - Handwritten Letters Theme -->
         <div class="vintage-col">
             <div class="vintage-header">
-                <div class="icon">✍️📜</div>
+                <div class="icon">✍️📜💌</div>
                 <h3>Handwritten Letters</h3>
-                <p>vintage · personal · timeless</p>
+                <p>vintage · personal · timeless · meaningful</p>
             </div>
             <div class="question-item" data-qid="0">
-                <div class="question-part">QUESTION 01</div>
-                <div class="question-text">📮 Do you write letters?</div>
+                <div class="question-part">📮 QUESTION 01</div>
+                <div class="question-text">"Do you write letters?"</div>
             </div>
             <div class="question-item" data-qid="2">
-                <div class="question-part">QUESTION 03</div>
-                <div class="question-text">💭 What do you think about face-to-face communication?</div>
+                <div class="question-part">💭 QUESTION 03</div>
+                <div class="question-text">"What do you think about face-to-face communication?"</div>
             </div>
         </div>
 
         <!-- Digital Column - Text Messages Theme -->
         <div class="digital-col">
             <div class="digital-header">
-                <div class="icon">📱💬</div>
+                <div class="icon">📱💬📲</div>
                 <h3>Text Messages</h3>
-                <p>digital · instant · connected</p>
+                <p>digital · instant · connected · efficient</p>
             </div>
             <div class="question-item" data-qid="1">
-                <div class="question-part">QUESTION 02</div>
-                <div class="question-text">📲 What method of communication do you prefer to contact people?</div>
+                <div class="question-part">📲 QUESTION 02</div>
+                <div class="question-text">"What method of communication do you prefer to contact people?"</div>
             </div>
             <div class="question-item" data-qid="3">
-                <div class="question-part">QUESTION 04</div>
-                <div class="question-text">💬 How often do you text people?</div>
+                <div class="question-part">💬 QUESTION 04</div>
+                <div class="question-text">"How often do you text people?"</div>
             </div>
         </div>
     </div>
@@ -524,7 +636,7 @@
     <!-- Progress Section -->
     <div class="progress-section">
         <div class="progress-dots" id="progressDots"></div>
-        <button class="reset-progress" id="resetProgressBtn">Reset Progress</button>
+        <button class="reset-progress" id="resetProgressBtn">⟳ Reset Progress</button>
     </div>
 </div>
 
@@ -562,10 +674,13 @@
         // Change color when low on time
         if (timeLeft <= 30) {
             timerDisplay.style.color = '#ff4444';
+            timerDisplay.style.textShadow = '0 0 10px #ff4444';
         } else if (timeLeft <= 60) {
             timerDisplay.style.color = '#ffaa44';
+            timerDisplay.style.textShadow = '0 0 5px #ffaa44';
         } else {
             timerDisplay.style.color = '#ffc107';
+            timerDisplay.style.textShadow = 'none';
         }
         
         if (timeLeft === 0 && isRunning) {
@@ -605,7 +720,7 @@
         }
         isRunning = false;
         startBtn.textContent = '▶ START';
-        startBtn.style.background = 'rgba(255, 193, 7, 0.2)';
+        startBtn.style.background = 'rgba(255, 193, 7, 0.25)';
         startBtn.style.color = '#ffc107';
     }
 
