@@ -438,8 +438,8 @@
         <h1 class="logo">SPEAK UP</h1>
         <p class="subtitle">Dynamic Discussions • Pair Work • B2 Level</p>
         <div class="stats">
-            <div class="stat"><span>20</span> Topics</div>
-            <div class="stat"><span>4</span> Questions Each</div>
+            <div class="stat"><span>10</span> Topics</div>
+            <div class="stat"><span>8</span> Questions Each</div>
             <div class="stat"><span>4</span> Minute Timer</div>
         </div>
     </div>
@@ -474,28 +474,18 @@
 </div>
 
 <script>
-    // 20 TOPICS with their file paths - IMPORTANT: This links to your files!
+    // ONLY THE 10 TOPICS YOU HAVE CREATED
     const TOPICS = [
-        { name: 'Communication', tag: 'Society', image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&h=400&fit=crop', desc: 'Discuss how we connect in the digital age', questions: 4, file: 'topics/communication.html' },
-        { name: 'Binge Watching', tag: 'Media', image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&h=400&fit=crop', desc: 'Streaming habits and modern entertainment', questions: 4, file: 'topics/binge-watching.html' },
-        { name: 'Family & Regrets', tag: 'Personal', image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&h=400&fit=crop', desc: 'Reflect on relationships and life choices', questions: 4, file: 'topics/family-regrets.html' },
-        { name: 'Culture', tag: 'Society', image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600&h=400&fit=crop', desc: 'Explore traditions and global perspectives', questions: 4, file: 'topics/culture.html' },
-        { name: 'Technology', tag: 'Digital', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop', desc: 'AI, gadgets, and the future of innovation', questions: 4, file: 'topics/technology.html' },
-        { name: 'Money & Investing', tag: 'Finance', image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop', desc: 'Smart spending, saving, and wealth', questions: 4, file: 'topics/money-investing.html' },
-        { name: 'Crime & Safety', tag: 'Law', image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop', desc: 'Justice, security, and safer communities', questions: 4, file: 'topics/crime-safety.html' },
-        { name: 'Emotions', tag: 'Psychology', image: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=600&h=400&fit=crop', desc: 'Feelings, empathy, and mental wellness', questions: 4, file: 'topics/emotions.html' },
-        { name: 'Career & Creativity', tag: 'Future', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop', desc: 'Work, innovation, and creative thinking', questions: 4, file: 'topics/career-creativity.html' },
-        { name: 'Memory & Life', tag: 'Philosophy', image: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=600&h=400&fit=crop', desc: 'Nostalgia, growth, and life stages', questions: 4, file: 'topics/memory-life.html' },
-        { name: 'Social Media', tag: 'Digital', image: 'https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=600&h=400&fit=crop', desc: 'Influence, addiction, and online culture', questions: 4, file: 'topics/social-media.html' },
-        { name: 'Travel', tag: 'Adventure', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop', desc: 'Journeys, cultures, and wanderlust', questions: 4, file: 'topics/travel.html' },
-        { name: 'Education', tag: 'Learning', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop', desc: 'Schools, skills, and lifelong learning', questions: 4, file: 'topics/education.html' },
-        { name: 'Health & Fitness', tag: 'Wellness', image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=400&fit=crop', desc: 'Exercise, nutrition, and well-being', questions: 4, file: 'topics/health-fitness.html' },
-        { name: 'Environment', tag: 'Nature', image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop', desc: 'Climate change and conservation', questions: 4, file: 'topics/environment.html' },
-        { name: 'Leadership', tag: 'Work', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop', desc: 'Guiding teams and making decisions', questions: 4, file: 'topics/leadership.html' },
-        { name: 'Art & Design', tag: 'Creative', image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&h=400&fit=crop', desc: 'Creativity, aesthetics, and expression', questions: 4, file: 'topics/art-design.html' },
-        { name: 'Future Predictions', tag: 'Futurism', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop', desc: 'Tomorrow\'s world and possibilities', questions: 4, file: 'topics/future-predictions.html' },
-        { name: 'Food & Cuisine', tag: 'Gastronomy', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop', desc: 'Cooking, flavors, and food culture', questions: 4, file: 'topics/food-cuisine.html' },
-        { name: 'Happiness', tag: 'Philosophy', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop', desc: 'What truly makes us happy?', questions: 4, file: 'topics/happiness.html' }
+        { name: 'Communication', tag: 'Society', image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&h=400&fit=crop', desc: 'Discuss how we connect in the digital age', questions: 8, file: 'topics/communication.html' },
+        { name: 'Binge Watching', tag: 'Media', image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&h=400&fit=crop', desc: 'Streaming habits and modern entertainment', questions: 8, file: 'topics/binge-watching.html' },
+        { name: 'Family & Regrets', tag: 'Personal', image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&h=400&fit=crop', desc: 'Reflect on relationships and life choices', questions: 8, file: 'topics/family-regrets.html' },
+        { name: 'Culture', tag: 'Society', image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600&h=400&fit=crop', desc: 'Explore traditions and global perspectives', questions: 8, file: 'topics/culture.html' },
+        { name: 'Technology', tag: 'Digital', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop', desc: 'AI, gadgets, and the future of innovation', questions: 8, file: 'topics/technology.html' },
+        { name: 'Money & Investing', tag: 'Finance', image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop', desc: 'Smart spending, saving, and wealth', questions: 8, file: 'topics/money-investing.html' },
+        { name: 'Crime & Safety', tag: 'Law', image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop', desc: 'Justice, security, and safer communities', questions: 8, file: 'topics/crime-safety.html' },
+        { name: 'Emotions', tag: 'Psychology', image: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=600&h=400&fit=crop', desc: 'Feelings, empathy, and mental wellness', questions: 8, file: 'topics/emotions.html' },
+        { name: 'Career & Creativity', tag: 'Future', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop', desc: 'Work, innovation, and creative thinking', questions: 8, file: 'topics/career-creativity.html' },
+        { name: 'Memory & Life', tag: 'Philosophy', image: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=600&h=400&fit=crop', desc: 'Nostalgia, growth, and life stages', questions: 8, file: 'topics/memory-life.html' }
     ];
 
     let pendingRandomTopic = null;
@@ -533,11 +523,9 @@
             </div>
         `).join('');
 
-        // Add click event to each card
         document.querySelectorAll('.topic-card').forEach((card, idx) => {
             card.addEventListener('click', () => {
                 const topic = TOPICS[idx];
-                // Navigate to the topic's HTML file
                 window.location.href = topic.file;
             });
         });
