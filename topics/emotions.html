@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speak Up · Emotions | Feelings & Connections</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Bright Emotions Background - Gradient */
+        .emotions-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, 
+                #ff6b6b 0%, 
+                #ffb347 15%, 
+                #ffd700 30%, 
+                #6bcf7f 50%, 
+                #4ecdc4 65%, 
+                #a855f7 80%, 
+                #ff6b6b 100%);
+            animation: bgFlow 12s ease-in-out infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes bgFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Happy Moments Overlay */
+        .happy-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Floating Happy Icons */
+        .floating-happy {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatHappy 18s ease-in-out infinite;
+        }
+
+        @keyframes floatHappy {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(25px, -20px) rotate(5deg); }
+            50% { transform: translate(-15px, -35px) rotate(-3deg); }
+            75% { transform: translate(20px, -15px) rotate(4deg); }
+        }
+
+        /* Animated Trophy */
+        .trophy {
+            position: fixed;
+            top: 12%;
+            right: 5%;
+            font-size: 4rem;
+            z-index: 1;
+            animation: trophyGlow 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px gold);
+        }
+
+        @keyframes trophyGlow {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 10px gold; }
+            50% { transform: scale(1.1); text-shadow: 0 0 30px gold; }
+        }
+
+        /* Animated Star */
+        .star {
+            position: fixed;
+            bottom: 15%;
+            left: 5%;
+            font-size: 3rem;
+            z-index: 1;
+            animation: starSpin 3s ease-in-out infinite;
+        }
+
+        @keyframes starSpin {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        /* Animated Heart */
+        .heart {
+            position: fixed;
+            top: 70%;
+            right: 8%;
+            font-size: 3rem;
+            z-index: 1;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Animated Smiley */
+        .smiley {
+            position: fixed;
+            top: 25%;
+            left: 4%;
+            font-size: 2.5rem;
+            z-index: 1;
+            animation: bounceHappy 2s ease-in-out infinite;
+        }
+
+        @keyframes bounceHappy {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 20;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 0.6rem 1.3rem;
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: translateX(-5px);
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Timer */
+        .timer-section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.4rem 1.2rem;
+            border-radius: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .timer-display {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffd700;
+            letter-spacing: 3px;
+        }
+
+        .timer-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .timer-btn:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        /* Header */
+        .theme-header {
+            text-align: center;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .theme-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .emotion-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Roles */
+        .roles-section {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .role {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .role.active {
+            background: #ffd700;
+            color: #000;
+            font-weight: 800;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .swap-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .swap-btn:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        /* 2 Columns */
+        .questions-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        /* Column styles */
+        .part1-col, .part2-col {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .part-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .part-header .icon {
+            font-size: 2rem;
+            display: inline-block;
+            animation: emotionPulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes emotionPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .part-header h3 {
+            font-size: 1.3rem;
+            color: #ffd700;
+            margin-top: 0.3rem;
+        }
+
+        .part-header .sub {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Question Cards */
+        .question-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 18px;
+            padding: 0.9rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .question-item:hover {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .question-item.completed {
+            background: rgba(255, 215, 0, 0.12);
+            border-left: 4px solid #ffd700;
+        }
+
+        /* Emotion Icon */
+        .emotion-icon {
+            font-size: 1.5rem;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .question-item:nth-child(1) .emotion-icon { animation: iconPop 1.5s ease-in-out infinite; animation-delay: 0s; }
+        .question-item:nth-child(2) .emotion-icon { animation: iconPop 1.5s ease-in-out infinite; animation-delay: 0.2s; }
+        .question-item:nth-child(3) .emotion-icon { animation: iconPop 1.5s ease-in-out infinite; animation-delay: 0.4s; }
+        .question-item:nth-child(4) .emotion-icon { animation: iconPop 1.5s ease-in-out infinite; animation-delay: 0.6s; }
+
+        @keyframes iconPop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .question-content {
+            flex: 1;
+        }
+
+        .q-emotion {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .question-text {
+            font-size: 0.9rem;
+            line-height: 1.45;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .dot.completed {
+            background: #ffd700;
+            color: #000;
+            font-weight: 800;
+            border-color: #ffd700;
+        }
+
+        .reset-progress {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .reset-progress:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 900px) {
+            .questions-wrapper {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .timer-display {
+                font-size: 1.3rem;
+            }
+            .nav {
+                flex-direction: column;
+            }
+            .theme-header h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Bright Emotions Background -->
+<div class="emotions-bg"></div>
+<div class="happy-overlay"></div>
+
+<!-- Animated Trophies & Happy Moments -->
+<div class="trophy">🏆✨</div>
+<div class="star">⭐🌟</div>
+<div class="heart">❤️💖</div>
+<div class="smiley">😊😄</div>
+
+<!-- Floating Happy Icons -->
+<div class="floating-happy" style="top: 8%; left: 3%;">🎉😊🏆</div>
+<div class="floating-happy" style="top: 70%; left: 8%; animation-duration: 16s;">💪😎⭐</div>
+<div class="floating-happy" style="top: 15%; right: 5%; animation-duration: 20s;">🥇🎈💖</div>
+<div class="floating-happy" style="bottom: 12%; right: 10%; animation-duration: 22s;">😍🤗🎉</div>
+<div class="floating-happy" style="top: 45%; left: 88%; animation-duration: 14s;">🏆😁✨</div>
+<div class="floating-happy" style="top: 55%; left: 12%; animation-duration: 24s;">💝🥰🎊</div>
+<div class="floating-happy" style="top: 30%; right: 20%; animation-duration: 18s;">🌟🏅💫</div>
+
+<div class="container">
+    <!-- Navigation -->
+    <div class="nav">
+        <a href="../index.html" class="back-btn">← Back to Menu</a>
+        <h1 class="topic-title">😊 EMOTIONS</h1>
+        <div class="timer-section">
+            <span class="timer-display" id="timerDisplay">4:00</span>
+            <button class="timer-btn" id="startBtn">▶ START</button>
+            <button class="timer-btn" id="resetBtn">⟳ RESET</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="theme-header">
+        <h2>🏆 FEEL · SHARE · CONNECT 💖</h2>
+        <p>Exploring happiness, stress, anger, pride, and supporting others</p>
+        <div class="emotion-badge">😊 Happiness · 💪 Strength · 💖 Empathy · 🏆 Pride</div>
+    </div>
+
+    <!-- Roles -->
+    <div class="roles-section">
+        <div class="role active" id="roleA">🎤 Speaker A</div>
+        <div class="role" id="roleB">👂 Listener B</div>
+        <button class="swap-btn" id="swapBtn">⇄ Swap Roles</button>
+    </div>
+
+    <!-- 2 Columns -->
+    <div class="questions-wrapper">
+        <!-- Part 1: Personal Emotions -->
+        <div class="part1-col">
+            <div class="part-header">
+                <div class="icon">😊💭💪</div>
+                <h3>PART 1 · Understanding Yourself</h3>
+                <div class="sub">happiness · stress · anger · expression</div>
+            </div>
+            
+            <div class="question-item" data-qid="0">
+                <div class="emotion-icon">😊✨</div>
+                <div class="question-content">
+                    <div class="q-emotion">HAPPINESS</div>
+                    <div class="question-text">"What makes you feel happy and why?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="1">
+                <div class="emotion-icon">😰💆</div>
+                <div class="question-content">
+                    <div class="q-emotion">STRESS & ANXIETY</div>
+                    <div class="question-text">"How do you deal with stress or anxiety?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="2">
+                <div class="emotion-icon">😤🔥</div>
+                <div class="question-content">
+                    <div class="q-emotion">ANGER</div>
+                    <div class="question-text">"What do you do when you feel angry?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="3">
+                <div class="emotion-icon">💬🎭</div>
+                <div class="question-content">
+                    <div class="q-emotion">EXPRESSION</div>
+                    <div class="question-text">"How do you usually express your feelings to others?"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part 2: Social Emotions -->
+        <div class="part2-col">
+            <div class="part-header">
+                <div class="icon">🏆🤝💖</div>
+                <h3>PART 2 · Connecting with Others</h3>
+                <div class="sub">pride · admiration · conflict · support</div>
+            </div>
+            
+            <div class="question-item" data-qid="4">
+                <div class="emotion-icon">🏆😌</div>
+                <div class="question-content">
+                    <div class="q-emotion">PRIDE</div>
+                    <div class="question-text">"Describe a time when you felt really proud of yourself."</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="5">
+                <div class="emotion-icon">👏🌟</div>
+                <div class="question-content">
+                    <div class="q-emotion">ADMIRATION</div>
+                    <div class="question-text">"What are some positive behaviors that you admire in others?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="6">
+                <div class="emotion-icon">😤🤝</div>
+                <div class="question-content">
+                    <div class="q-emotion">CONFLICT</div>
+                    <div class="question-text">"How do you react when someone is rude to you?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="7">
+                <div class="emotion-icon">🤗💕</div>
+                <div class="question-content">
+                    <div class="q-emotion">SUPPORT</div>
+                    <div class="question-text">"How do you support a friend who is feeling sad?"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Section -->
+    <div class="progress-section">
+        <div class="progress-dots" id="progressDots"></div>
+        <button class="reset-progress" id="resetProgressBtn">⟳ Reset Progress</button>
+    </div>
+    
+    <div class="footer">
+        😊 Click any question to mark as completed · Share your feelings with your partner! 💖
+    </div>
+</div>
+
+<script>
+    const QUESTIONS_COUNT = 8;
+
+    let completed = new Set();
+    let timeLeft = 240;
+    let timerInterval = null;
+    let isRunning = false;
+    let roleAIsSpeaker = true;
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    const roleA = document.getElementById('roleA');
+    const roleB = document.getElementById('roleB');
+    const resetProgressBtn = document.getElementById('resetProgressBtn');
+
+    function updateTimerDisplay() {
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        timerDisplay.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        
+        if (timeLeft <= 30) {
+            timerDisplay.style.color = '#ff4444';
+            timerDisplay.style.textShadow = '0 0 10px #ff4444';
+        } else if (timeLeft <= 60) {
+            timerDisplay.style.color = '#ffaa44';
+            timerDisplay.style.textShadow = '0 0 5px #ffaa44';
+        } else {
+            timerDisplay.style.color = '#ffd700';
+            timerDisplay.style.textShadow = 'none';
+        }
+        
+        if (timeLeft === 0 && isRunning) {
+            stopTimer();
+            alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions? 😊");
+        }
+    }
+
+    function startTimer() {
+        if (isRunning) return;
+        if (timeLeft <= 0) {
+            timeLeft = 240;
+            updateTimerDisplay();
+        }
+        isRunning = true;
+        startBtn.textContent = '⏸ PAUSE';
+        startBtn.style.background = '#ffd700';
+        startBtn.style.color = '#000';
+        
+        timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplay();
+            }
+            if (timeLeft === 0) {
+                stopTimer();
+                alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions? 😊");
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        isRunning = false;
+        startBtn.textContent = '▶ START';
+        startBtn.style.background = 'rgba(255, 215, 0, 0.2)';
+        startBtn.style.color = '#ffd700';
+    }
+
+    function resetTimer() {
+        stopTimer();
+        timeLeft = 240;
+        updateTimerDisplay();
+    }
+
+    function toggleQuestion(qid) {
+        if (completed.has(qid)) {
+            completed.delete(qid);
+        } else {
+            completed.add(qid);
+        }
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    function updateQuestionsUI() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            if (completed.has(index)) {
+                q.classList.add('completed');
+            } else {
+                q.classList.remove('completed');
+            }
+        });
+    }
+
+    function updateDotsUI() {
+        const dotsDiv = document.getElementById('progressDots');
+        dotsDiv.innerHTML = '';
+        for (let i = 0; i < QUESTIONS_COUNT; i++) {
+            const dot = document.createElement('div');
+            dot.className = `dot ${completed.has(i) ? 'completed' : ''}`;
+            dot.textContent = i + 1;
+            dot.onclick = () => toggleQuestion(i);
+            dotsDiv.appendChild(dot);
+        }
+    }
+
+    function resetProgress() {
+        completed.clear();
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    function updateRolesUI() {
+        if (roleAIsSpeaker) {
+            roleA.classList.add('active');
+            roleB.classList.remove('active');
+            roleA.innerHTML = '🎤 Speaker A';
+            roleB.innerHTML = '👂 Listener B';
+        } else {
+            roleB.classList.add('active');
+            roleA.classList.remove('active');
+            roleB.innerHTML = '🎤 Speaker B';
+            roleA.innerHTML = '👂 Listener A';
+        }
+    }
+
+    function swapRoles() {
+        roleAIsSpeaker = !roleAIsSpeaker;
+        updateRolesUI();
+    }
+
+    function attachQuestionEvents() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            q.onclick = () => toggleQuestion(index);
+        });
+    }
+
+    function init() {
+        updateTimerDisplay();
+        attachQuestionEvents();
+        updateDotsUI();
+        updateRolesUI();
+        
+        startBtn.onclick = startTimer;
+        resetBtn.onclick = resetTimer;
+        swapBtn.onclick = swapRoles;
+        resetProgressBtn.onclick = resetProgress;
+    }
+
+    init();
+</script>
+</body>
+</html>
