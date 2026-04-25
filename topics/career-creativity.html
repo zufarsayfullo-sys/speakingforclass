@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speak Up · Career & Creativity | Build Your Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dynamic Background - Career & Creative Split */
+        .career-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: flex;
+        }
+
+        .career-side {
+            flex: 1;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #1565c0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .career-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=1000&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            animation: zoomCareer 20s ease-in-out infinite alternate;
+        }
+
+        .creative-side {
+            flex: 1;
+            background: linear-gradient(135deg, #ff6d00 0%, #ff8f00 50%, #ffab00 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .creative-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&h=1000&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            animation: zoomCreative 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes zoomCareer {
+            0% { transform: scale(1); opacity: 0.15; }
+            100% { transform: scale(1.08); opacity: 0.25; }
+        }
+
+        @keyframes zoomCreative {
+            0% { transform: scale(1); opacity: 0.15; }
+            100% { transform: scale(1.1); opacity: 0.25; }
+        }
+
+        /* Floating Professional & Creative Icons */
+        .floating {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatIcon 18s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(25px, -20px) rotate(5deg); }
+            50% { transform: translate(-15px, -35px) rotate(-3deg); }
+            75% { transform: translate(20px, -15px) rotate(4deg); }
+        }
+
+        /* Animated Briefcase */
+        .briefcase {
+            position: fixed;
+            top: 15%;
+            left: 5%;
+            font-size: 3rem;
+            z-index: 1;
+            animation: briefcaseSwing 3s ease-in-out infinite;
+        }
+
+        @keyframes briefcaseSwing {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        /* Animated Paint Palette */
+        .palette {
+            position: fixed;
+            bottom: 15%;
+            right: 5%;
+            font-size: 3rem;
+            z-index: 1;
+            animation: paletteSpin 4s ease-in-out infinite;
+        }
+
+        @keyframes paletteSpin {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        /* Animated Rocket */
+        .rocket {
+            position: fixed;
+            top: 50%;
+            right: 8%;
+            font-size: 2.5rem;
+            z-index: 1;
+            animation: rocketFly 6s ease-in-out infinite;
+        }
+
+        @keyframes rocketFly {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-20px, -30px); }
+            50% { transform: translate(-40px, -10px); }
+            75% { transform: translate(-20px, 20px); }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 20;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 0.6rem 1.3rem;
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: translateX(-5px);
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #ffab00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Timer */
+        .timer-section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.4rem 1.2rem;
+            border-radius: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .timer-display {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffab00;
+            letter-spacing: 3px;
+        }
+
+        .timer-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .timer-btn:hover {
+            background: #ffab00;
+            color: #000;
+        }
+
+        /* Header */
+        .theme-header {
+            text-align: center;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .theme-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #ffab00, #ff6d00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .theme-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Roles */
+        .roles-section {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .role {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .role.active {
+            background: #ffab00;
+            color: #000;
+            font-weight: 800;
+            box-shadow: 0 0 20px rgba(255, 171, 0, 0.5);
+        }
+
+        .swap-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .swap-btn:hover {
+            background: #ffab00;
+            color: #000;
+        }
+
+        /* 2 Columns */
+        .questions-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        /* Column styles */
+        .career-col {
+            background: rgba(13, 71, 161, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .creative-col {
+            background: rgba(255, 109, 0, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .part-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #ffab00;
+        }
+
+        .part-header .icon {
+            font-size: 2rem;
+            display: inline-block;
+            animation: headerPulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes headerPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .part-header h3 {
+            font-size: 1.3rem;
+            color: #ffab00;
+            margin-top: 0.3rem;
+        }
+
+        .part-header .sub {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Question Cards */
+        .question-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 18px;
+            padding: 0.9rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .question-item:hover {
+            border-color: #ffab00;
+            background: rgba(255, 171, 0, 0.15);
+            transform: translateX(5px);
+        }
+
+        .question-item.completed {
+            background: rgba(255, 171, 0, 0.2);
+            border-left: 4px solid #ffab00;
+        }
+
+        /* Icon styling */
+        .topic-icon {
+            font-size: 1.5rem;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .question-item:nth-child(1) .topic-icon { animation: iconBounce 1.5s ease-in-out infinite; animation-delay: 0s; }
+        .question-item:nth-child(2) .topic-icon { animation: iconBounce 1.5s ease-in-out infinite; animation-delay: 0.2s; }
+        .question-item:nth-child(3) .topic-icon { animation: iconBounce 1.5s ease-in-out infinite; animation-delay: 0.4s; }
+        .question-item:nth-child(4) .topic-icon { animation: iconBounce 1.5s ease-in-out infinite; animation-delay: 0.6s; }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .question-content {
+            flex: 1;
+        }
+
+        .q-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            color: #ffab00;
+        }
+
+        .question-text {
+            font-size: 0.9rem;
+            line-height: 1.45;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .dot.completed {
+            background: #ffab00;
+            color: #000;
+            font-weight: 800;
+            border-color: #ffab00;
+        }
+
+        .reset-progress {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .reset-progress:hover {
+            background: #ffab00;
+            color: #000;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 900px) {
+            .questions-wrapper {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .timer-display {
+                font-size: 1.3rem;
+            }
+            .nav {
+                flex-direction: column;
+            }
+            .theme-header h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Career & Creative Split Background -->
+<div class="career-bg">
+    <div class="career-side"></div>
+    <div class="creative-side"></div>
+</div>
+
+<!-- Animated Icons -->
+<div class="briefcase">💼🚀</div>
+<div class="palette">🎨✨</div>
+<div class="rocket">🚀⭐</div>
+
+<!-- Floating Icons -->
+<div class="floating" style="top: 8%; left: 3%;">💼📊📈</div>
+<div class="floating" style="top: 70%; left: 8%; animation-duration: 16s;">🎨🖌️🌈</div>
+<div class="floating" style="top: 15%; right: 5%; animation-duration: 20s;">🏆💡🔧</div>
+<div class="floating" style="bottom: 12%; right: 10%; animation-duration: 22s;">✨💭🎯</div>
+<div class="floating" style="top: 45%; left: 88%; animation-duration: 14s;">🚀📚💪</div>
+<div class="floating" style="top: 55%; left: 12%; animation-duration: 24s;">🎭💡🎨</div>
+
+<div class="container">
+    <!-- Navigation -->
+    <div class="nav">
+        <a href="../index.html" class="back-btn">← Back to Menu</a>
+        <h1 class="topic-title">🚀 CAREER & CREATIVITY</h1>
+        <div class="timer-section">
+            <span class="timer-display" id="timerDisplay">4:00</span>
+            <button class="timer-btn" id="startBtn">▶ START</button>
+            <button class="timer-btn" id="resetBtn">⟳ RESET</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="theme-header">
+        <h2>💼 BUILD YOUR FUTURE · 🎨 UNLEASH YOUR CREATIVITY</h2>
+        <p>Planning your career, developing skills, and thinking outside the box</p>
+        <div class="badge">💼 Career Planning · 📈 Investment · 🎨 Creative Thinking · 💡 Innovation</div>
+    </div>
+
+    <!-- Roles -->
+    <div class="roles-section">
+        <div class="role active" id="roleA">🎤 Speaker A</div>
+        <div class="role" id="roleB">👂 Listener B</div>
+        <button class="swap-btn" id="swapBtn">⇄ Swap Roles</button>
+    </div>
+
+    <!-- 2 Columns -->
+    <div class="questions-wrapper">
+        <!-- Part 1: Career & Future -->
+        <div class="career-col">
+            <div class="part-header">
+                <div class="icon">💼📊🚀</div>
+                <h3>PART 1 · Career & Future</h3>
+                <div class="sub">planning · skills · investment · opportunities</div>
+            </div>
+            
+            <div class="question-item" data-qid="0">
+                <div class="topic-icon">📋🎯</div>
+                <div class="question-content">
+                    <div class="q-label">CAREER PLANNING</div>
+                    <div class="question-text">"How do you plan for your future career?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="1">
+                <div class="topic-icon">🧠💡</div>
+                <div class="question-content">
+                    <div class="q-label">ESSENTIAL SKILLS</div>
+                    <div class="question-text">"What skills do you think are essential for the future?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="2">
+                <div class="topic-icon">⏰💰</div>
+                <div class="question-content">
+                    <div class="q-label">TIME & MONEY</div>
+                    <div class="question-text">"How do you decide where to invest your time and money?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="3">
+                <div class="topic-icon">🌱📈</div>
+                <div class="question-content">
+                    <div class="q-label">INVESTMENT OPPORTUNITIES</div>
+                    <div class="question-text">"What are some good investment opportunities for young people?"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part 2: Creativity & Innovation -->
+        <div class="creative-col">
+            <div class="part-header">
+                <div class="icon">🎨💡✨</div>
+                <h3>PART 2 · Creativity & Innovation</h3>
+                <div class="sub">creative expression · education · problem-solving</div>
+            </div>
+            
+            <div class="question-item" data-qid="4">
+                <div class="topic-icon">🎭🖌️</div>
+                <div class="question-content">
+                    <div class="q-label">CREATIVE EXPRESSION</div>
+                    <div class="question-text">"In what ways are you creative?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="5">
+                <div class="topic-icon">📚🎓</div>
+                <div class="question-content">
+                    <div class="q-label">CREATIVITY IN EDUCATION</div>
+                    <div class="question-text">"How important is creativity in education?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="6">
+                <div class="topic-icon">🧠📖</div>
+                <div class="question-content">
+                    <div class="q-label">TEACHING CREATIVITY</div>
+                    <div class="question-text">"Can creativity be taught?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="7">
+                <div class="topic-icon">🔧💡</div>
+                <div class="question-content">
+                    <div class="q-label">PROBLEM SOLVING</div>
+                    <div class="question-text">"What role does creativity play in problem-solving?"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Section -->
+    <div class="progress-section">
+        <div class="progress-dots" id="progressDots"></div>
+        <button class="reset-progress" id="resetProgressBtn">⟳ Reset Progress</button>
+    </div>
+    
+    <div class="footer">
+        💼 Click any question to mark as completed · Plan your future and unleash creativity with your partner! 🎨
+    </div>
+</div>
+
+<script>
+    const QUESTIONS_COUNT = 8;
+
+    let completed = new Set();
+    let timeLeft = 240;
+    let timerInterval = null;
+    let isRunning = false;
+    let roleAIsSpeaker = true;
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    const roleA = document.getElementById('roleA');
+    const roleB = document.getElementById('roleB');
+    const resetProgressBtn = document.getElementById('resetProgressBtn');
+
+    function updateTimerDisplay() {
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        timerDisplay.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        
+        if (timeLeft <= 30) {
+            timerDisplay.style.color = '#ff4444';
+            timerDisplay.style.textShadow = '0 0 10px #ff4444';
+        } else if (timeLeft <= 60) {
+            timerDisplay.style.color = '#ffaa44';
+            timerDisplay.style.textShadow = '0 0 5px #ffaa44';
+        } else {
+            timerDisplay.style.color = '#ffab00';
+            timerDisplay.style.textShadow = 'none';
+        }
+        
+        if (timeLeft === 0 && isRunning) {
+            stopTimer();
+            alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions? 🚀");
+        }
+    }
+
+    function startTimer() {
+        if (isRunning) return;
+        if (timeLeft <= 0) {
+            timeLeft = 240;
+            updateTimerDisplay();
+        }
+        isRunning = true;
+        startBtn.textContent = '⏸ PAUSE';
+        startBtn.style.background = '#ffab00';
+        startBtn.style.color = '#000';
+        
+        timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplay();
+            }
+            if (timeLeft === 0) {
+                stopTimer();
+                alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions? 🚀");
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        isRunning = false;
+        startBtn.textContent = '▶ START';
+        startBtn.style.background = 'rgba(255, 171, 0, 0.2)';
+        startBtn.style.color = '#ffab00';
+    }
+
+    function resetTimer() {
+        stopTimer();
+        timeLeft = 240;
+        updateTimerDisplay();
+    }
+
+    function toggleQuestion(qid) {
+        if (completed.has(qid)) {
+            completed.delete(qid);
+        } else {
+            completed.add(qid);
+        }
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    function updateQuestionsUI() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            if (completed.has(index)) {
+                q.classList.add('completed');
+            } else {
+                q.classList.remove('completed');
+            }
+        });
+    }
+
+    function updateDotsUI() {
+        const dotsDiv = document.getElementById('progressDots');
+        dotsDiv.innerHTML = '';
+        for (let i = 0; i < QUESTIONS_COUNT; i++) {
+            const dot = document.createElement('div');
+            dot.className = `dot ${completed.has(i) ? 'completed' : ''}`;
+            dot.textContent = i + 1;
+            dot.onclick = () => toggleQuestion(i);
+            dotsDiv.appendChild(dot);
+        }
+    }
+
+    function resetProgress() {
+        completed.clear();
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    function updateRolesUI() {
+        if (roleAIsSpeaker) {
+            roleA.classList.add('active');
+            roleB.classList.remove('active');
+            roleA.innerHTML = '🎤 Speaker A';
+            roleB.innerHTML = '👂 Listener B';
+        } else {
+            roleB.classList.add('active');
+            roleA.classList.remove('active');
+            roleB.innerHTML = '🎤 Speaker B';
+            roleA.innerHTML = '👂 Listener A';
+        }
+    }
+
+    function swapRoles() {
+        roleAIsSpeaker = !roleAIsSpeaker;
+        updateRolesUI();
+    }
+
+    function attachQuestionEvents() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            q.onclick = () => toggleQuestion(index);
+        });
+    }
+
+    function init() {
+        updateTimerDisplay();
+        attachQuestionEvents();
+        updateDotsUI();
+        updateRolesUI();
+        
+        startBtn.onclick = startTimer;
+        resetBtn.onclick = resetTimer;
+        swapBtn.onclick = swapRoles;
+        resetProgressBtn.onclick = resetProgress;
+    }
+
+    init();
+</script>
+</body>
+</html>
