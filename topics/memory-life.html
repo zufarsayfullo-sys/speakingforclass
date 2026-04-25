@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speak Up · Memory & Life | Stages of Our Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Vintage/Nostalgia Background */
+        .memory-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #2c1810 0%, #4a2c20 30%, #2c1810 70%, #1a0f0a 100%);
+        }
+
+        /* Vintage photo collage overlay */
+        .photo-collage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            background-image: url('https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=1600&h=1000&fit=crop');
+            background-size: cover;
+            background-position: center;
+            animation: slowPan 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowPan {
+            0% { transform: scale(1); opacity: 0.12; }
+            100% { transform: scale(1.08); opacity: 0.18; }
+        }
+
+        /* Polaroid effect overlay */
+        .polaroid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 40px,
+                rgba(255, 255, 255, 0.02) 40px,
+                rgba(255, 255, 255, 0.02) 80px
+            );
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Animated Polaroid frames */
+        .polaroid {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 234, 167, 0.3);
+            border-radius: 8px;
+            padding: 8px 8px 20px 8px;
+            z-index: 1;
+            animation: floatPolaroid 20s ease-in-out infinite;
+        }
+
+        @keyframes floatPolaroid {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, -15px) rotate(2deg); }
+            50% { transform: translate(-10px, -25px) rotate(-2deg); }
+            75% { transform: translate(10px, -10px) rotate(1deg); }
+        }
+
+        /* Vintage clock */
+        .vintage-clock {
+            position: fixed;
+            top: 10%;
+            right: 3%;
+            font-size: 3rem;
+            z-index: 1;
+            animation: clockTick 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 234, 167, 0.5));
+        }
+
+        @keyframes clockTick {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Old camera */
+        .old-camera {
+            position: fixed;
+            bottom: 12%;
+            left: 3%;
+            font-size: 3rem;
+            z-index: 1;
+            animation: cameraFlash 3s ease-in-out infinite;
+        }
+
+        @keyframes cameraFlash {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; text-shadow: 0 0 20px #ffea67; }
+        }
+
+        /* Vintage key */
+        .vintage-key {
+            position: fixed;
+            top: 50%;
+            left: 2%;
+            font-size: 2.5rem;
+            z-index: 1;
+            animation: keySwing 4s ease-in-out infinite;
+        }
+
+        @keyframes keySwing {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        /* Floating nostalgic icons */
+        .floating {
+            position: fixed;
+            font-size: 1.8rem;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatNostalgic 18s ease-in-out infinite;
+        }
+
+        @keyframes floatNostalgic {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(3deg); }
+            50% { transform: translate(-15px, -30px) rotate(-2deg); }
+            75% { transform: translate(15px, -15px) rotate(2deg); }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 20;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 80px;
+            border: 1px solid rgba(255, 234, 167, 0.4);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 234, 167, 0.15);
+            border: 1px solid rgba(255, 234, 167, 0.4);
+            padding: 0.6rem 1.3rem;
+            border-radius: 50px;
+            color: #ffea67;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background: #ffea67;
+            color: #000;
+            transform: translateX(-5px);
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffea67;
+            font-family: 'Caveat', cursive;
+            text-shadow: 0 0 10px rgba(255, 234, 103, 0.5);
+        }
+
+        /* Timer */
+        .timer-section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.4rem 1.2rem;
+            border-radius: 80px;
+            border: 1px solid rgba(255, 234, 167, 0.4);
+        }
+
+        .timer-display {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffea67;
+            letter-spacing: 3px;
+        }
+
+        .timer-btn {
+            background: rgba(255, 234, 167, 0.2);
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            color: #ffea67;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .timer-btn:hover {
+            background: #ffea67;
+            color: #000;
+        }
+
+        /* Header */
+        .theme-header {
+            text-align: center;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .theme-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Caveat', cursive;
+            color: #ffea67;
+            text-shadow: 0 0 20px rgba(255, 234, 103, 0.4);
+        }
+
+        .theme-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .memory-badge {
+            display: inline-block;
+            background: rgba(255, 234, 167, 0.12);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            color: #ffea67;
+            border: 1px solid rgba(255, 234, 167, 0.3);
+        }
+
+        /* Roles */
+        .roles-section {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 234, 167, 0.3);
+        }
+
+        .role {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .role.active {
+            background: #ffea67;
+            color: #000;
+            font-weight: 800;
+            box-shadow: 0 0 20px rgba(255, 234, 103, 0.5);
+        }
+
+        .swap-btn {
+            background: rgba(255, 234, 167, 0.15);
+            border: 1px solid rgba(255, 234, 167, 0.4);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #ffea67;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .swap-btn:hover {
+            background: #ffea67;
+            color: #000;
+        }
+
+        /* 2 Columns with Timeline feel */
+        .questions-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        /* Column styles - Vintage Paper effect */
+        .memories-col {
+            background: rgba(44, 24, 16, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 234, 167, 0.35);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .life-col {
+            background: rgba(74, 44, 32, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 234, 167, 0.35);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .part-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #ffea67;
+        }
+
+        .part-header .icon {
+            font-size: 2rem;
+            display: inline-block;
+            animation: nostalgiaPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes nostalgiaPulse {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 5px #ffea67; }
+            50% { transform: scale(1.05); text-shadow: 0 0 15px #ffea67; }
+        }
+
+        .part-header h3 {
+            font-size: 1.3rem;
+            color: #ffea67;
+            margin-top: 0.3rem;
+            font-family: 'Caveat', cursive;
+        }
+
+        .part-header .sub {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Question Cards - Vintage style */
+        .question-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 18px;
+            padding: 0.9rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            border: 1px solid rgba(255, 234, 167, 0.2);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .question-item:hover {
+            border-color: #ffea67;
+            background: rgba(255, 234, 103, 0.1);
+            transform: translateX(5px);
+        }
+
+        .question-item.completed {
+            background: rgba(255, 234, 103, 0.12);
+            border-left: 4px solid #ffea67;
+        }
+
+        /* Memory Icon */
+        .memory-icon {
+            font-size: 1.5rem;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .question-item:nth-child(1) .memory-icon { animation: memoryFloat 2s ease-in-out infinite; animation-delay: 0s; }
+        .question-item:nth-child(2) .memory-icon { animation: memoryFloat 2s ease-in-out infinite; animation-delay: 0.2s; }
+        .question-item:nth-child(3) .memory-icon { animation: memoryFloat 2s ease-in-out infinite; animation-delay: 0.4s; }
+        .question-item:nth-child(4) .memory-icon { animation: memoryFloat 2s ease-in-out infinite; animation-delay: 0.6s; }
+
+        @keyframes memoryFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .question-content {
+            flex: 1;
+        }
+
+        .q-memory {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            color: #ffea67;
+        }
+
+        .question-text {
+            font-size: 0.9rem;
+            line-height: 1.45;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid rgba(255, 234, 167, 0.3);
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 234, 167, 0.3);
+            font-weight: 700;
+            color: #ffea67;
+        }
+
+        .dot.completed {
+            background: #ffea67;
+            color: #000;
+            font-weight: 800;
+            border-color: #ffea67;
+        }
+
+        .reset-progress {
+            background: rgba(255, 234, 167, 0.12);
+            border: 1px solid rgba(255, 234, 167, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #ffea67;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .reset-progress:hover {
+            background: #ffea67;
+            color: #000;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: rgba(255, 234, 167, 0.6);
+        }
+
+        @media (max-width: 900px) {
+            .questions-wrapper {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .timer-display {
+                font-size: 1.3rem;
+            }
+            .nav {
+                flex-direction: column;
+            }
+            .theme-header h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Memory & Life Background -->
+<div class="memory-bg"></div>
+<div class="photo-collage"></div>
+<div class="polaroid-overlay"></div>
+
+<!-- Animated Polaroid frames -->
+<div class="polaroid" style="top: 12%; left: 2%; transform: rotate(-3deg);">
+    <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.1);"></div>
+</div>
+<div class="polaroid" style="bottom: 15%; right: 3%; transform: rotate(4deg); animation-duration: 22s;">
+    <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.08);"></div>
+</div>
+
+<!-- Vintage Elements -->
+<div class="vintage-clock">⏰📷</div>
+<div class="old-camera">📸🎞️</div>
+<div class="vintage-key">🔑📜</div>
+
+<!-- Floating Nostalgic Icons -->
+<div class="floating" style="top: 8%; left: 5%;">📖📚🎓</div>
+<div class="floating" style="top: 70%; left: 8%; animation-duration: 16s;">👶🧒👨👴</div>
+<div class="floating" style="top: 15%; right: 5%; animation-duration: 20s;">💭🕰️📸</div>
+<div class="floating" style="bottom: 12%; right: 10%; animation-duration: 22s;">🎂🎈🎁</div>
+<div class="floating" style="top: 45%; left: 88%; animation-duration: 14s;">💝🤝💕</div>
+<div class="floating" style="top: 55%; left: 12%; animation-duration: 24s;">🌟✨⭐</div>
+
+<div class="container">
+    <!-- Navigation -->
+    <div class="nav">
+        <a href="../index.html" class="back-btn">← Back to Menu</a>
+        <h1 class="topic-title">📖 MEMORY & LIFE</h1>
+        <div class="timer-section">
+            <span class="timer-display" id="timerDisplay">4:00</span>
+            <button class="timer-btn" id="startBtn">▶ START</button>
+            <button class="timer-btn" id="resetBtn">⟳ RESET</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="theme-header">
+        <h2>📸 CHILDHOOD · MEMORIES · LIFE'S JOURNEY 🕰️</h2>
+        <p>Exploring how memories shape us, the stages of life, and growing through time</p>
+        <div class="memory-badge">💭 Childhood · 🧠 Memory · 🌱 Life Stages · 💝 Relationships</div>
+    </div>
+
+    <!-- Roles -->
+    <div class="roles-section">
+        <div class="role active" id="roleA">🎤 Speaker A</div>
+        <div class="role" id="roleB">👂 Listener B</div>
+        <button class="swap-btn" id="swapBtn">⇄ Swap Roles</button>
+    </div>
+
+    <!-- 2 Columns -->
+    <div class="questions-wrapper">
+        <!-- Part 1: Memories & Mind -->
+        <div class="memories-col">
+            <div class="part-header">
+                <div class="icon">💭🧠📸</div>
+                <h3>PART 1 · Memories & The Mind</h3>
+                <div class="sub">childhood · memory techniques · emotions · forgetting</div>
+            </div>
+            
+            <div class="question-item" data-qid="0">
+                <div class="memory-icon">👶➡️👨</div>
+                <div class="question-content">
+                    <div class="q-memory">CHILDHOOD INFLUENCE</div>
+                    <div class="question-text">"How do childhood memories influence who we are today?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="1">
+                <div class="memory-icon">🧠💪</div>
+                <div class="question-content">
+                    <div class="q-memory">MEMORY TECHNIQUES</div>
+                    <div class="question-text">"What techniques do you use to improve memory?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="2">
+                <div class="memory-icon">❤️😢</div>
+                <div class="question-content">
+                    <div class="q-memory">EMOTION & MEMORY</div>
+                    <div class="question-text">"How does emotion affect memory retention?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="3">
+                <div class="memory-icon">🗑️💭</div>
+                <div class="question-content">
+                    <div class="q-memory">THE ART OF FORGETTING</div>
+                    <div class="question-text">"Can forgetting be as important as remembering?"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part 2: Life Stages & Growth -->
+        <div class="life-col">
+            <div class="part-header">
+                <div class="icon">🌱➡️🌳🌟</div>
+                <h3>PART 2 · Life Stages & Growth</h3>
+                <div class="sub">aging · challenges · relationships · wisdom</div>
+            </div>
+            
+            <div class="question-item" data-qid="4">
+                <div class="memory-icon">👶➡️👴</div>
+                <div class="question-content">
+                    <div class="q-memory">LIFE TRANSFORMATION</div>
+                    <div class="question-text">"How does your life change as you grow older?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="5">
+                <div class="memory-icon">⛰️💪</div>
+                <div class="question-content">
+                    <div class="q-memory">LIFE CHALLENGES</div>
+                    <div class="question-text">"What are some challenges you face at different life stages?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="6">
+                <div class="memory-icon">🤝💕</div>
+                <div class="question-content">
+                    <div class="q-memory">RELATIONSHIPS</div>
+                    <div class="question-text">"How do relationships develop over time?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="7">
+                <div class="memory-icon">🎁💝</div>
+                <div class="question-content">
+                    <div class="q-memory">LIFE ADVICE</div>
+                    <div class="question-text">"What advice would you give to someone entering a new stage of life?"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Section -->
+    <div class="progress-section">
+        <div class="progress-dots" id="progressDots"></div>
+        <button class="reset-progress" id="resetProgressBtn">⟳ Reset Progress</button>
+    </div>
+    
+    <div class="footer">
+        📸 Click any question to mark as completed · Share your memories and life journey with your partner! 💭
+    </div>
+</div>
+
+<script>
+    const QUESTIONS_COUNT = 8;
+
+    let completed = new Set();
+    let timeLeft = 240;
+    let timerInterval = null;
+    let isRunning = false;
+    let roleAIsSpeaker = true;
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    const roleA = document.getElementById('roleA');
+    const roleB = document.getElementById('roleB');
+    const resetProgressBtn = document.getElementById('resetProgressBtn');
+
+    function updateTimerDisplay() {
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        timerDisplay.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        
+        if (timeLeft <= 30) {
+            timerDisplay.style.color = '#ff8888';
+            timerDisplay.style.textShadow = '0 0 10px #ff8888';
+        } else if (timeLeft <= 60) {
+            timerDisplay.style.color = '#ffcc88';
+            timerDisplay.style.textShadow = '0 0 5px #ffcc88';
+        } else {
+            timerDisplay.style.color = '#ffea67';
+            timerDisplay.style.textShadow = 'none';
+        }
+        
+        if (timeLeft === 0 && isRunning) {
+            stopTimer();
+            alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions? 📸");
+        }
+    }
+
+    function startTimer() {
+        if (isRunning) return;
+        if (timeLeft <= 0) {
+            timeLeft = 240;
+            updateTimerDisplay();
+        }
+        isRunning = true;
+        startBtn.textContent = '⏸ PAUSE';
+        startBtn.style.background = '#ffea67';
+        startBtn.style.color = '#000';
+        
+        timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplay();
+            }
+            if (timeLeft === 0) {
+                stopTimer();
+                alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions? 📸");
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        isRunning = false;
+        startBtn.textContent = '▶ START';
+        startBtn.style.background = 'rgba(255, 234, 103, 0.2)';
+        startBtn.style.color = '#ffea67';
+    }
+
+    function resetTimer() {
+        stopTimer();
+        timeLeft = 240;
+        updateTimerDisplay();
+    }
+
+    function toggleQuestion(qid) {
+        if (completed.has(qid)) {
+            completed.delete(qid);
+        } else {
+            completed.add(qid);
+        }
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    function updateQuestionsUI() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            if (completed.has(index)) {
+                q.classList.add('completed');
+            } else {
+                q.classList.remove('completed');
+            }
+        });
+    }
+
+    function updateDotsUI() {
+        const dotsDiv = document.getElementById('progressDots');
+        dotsDiv.innerHTML = '';
+        for (let i = 0; i < QUESTIONS_COUNT; i++) {
+            const dot = document.createElement('div');
+            dot.className = `dot ${completed.has(i) ? 'completed' : ''}`;
+            dot.textContent = i + 1;
+            dot.onclick = () => toggleQuestion(i);
+            dotsDiv.appendChild(dot);
+        }
+    }
+
+    function resetProgress() {
+        completed.clear();
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    function updateRolesUI() {
+        if (roleAIsSpeaker) {
+            roleA.classList.add('active');
+            roleB.classList.remove('active');
+            roleA.innerHTML = '🎤 Speaker A';
+            roleB.innerHTML = '👂 Listener B';
+        } else {
+            roleB.classList.add('active');
+            roleA.classList.remove('active');
+            roleB.innerHTML = '🎤 Speaker B';
+            roleA.innerHTML = '👂 Listener A';
+        }
+    }
+
+    function swapRoles() {
+        roleAIsSpeaker = !roleAIsSpeaker;
+        updateRolesUI();
+    }
+
+    function attachQuestionEvents() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            q.onclick = () => toggleQuestion(index);
+        });
+    }
+
+    function init() {
+        updateTimerDisplay();
+        attachQuestionEvents();
+        updateDotsUI();
+        updateRolesUI();
+        
+        startBtn.onclick = startTimer;
+        resetBtn.onclick = resetTimer;
+        swapBtn.onclick = swapRoles;
+        resetProgressBtn.onclick = resetProgress;
+    }
+
+    init();
+</script>
+</body>
+</html>
