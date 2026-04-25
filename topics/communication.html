@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speak Up · Communication | Letters vs Texts</title>
+    <title>Speak Up · Communication | Letters vs Digital World</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* Animated Photo Backgrounds - Split Screen with Zoom Effect */
+        /* Animated Photo Backgrounds */
         .photo-bg {
             position: fixed;
             top: 0;
@@ -31,7 +31,7 @@
             z-index: 0;
         }
 
-        /* Left Side - Vintage Letter Photo */
+        /* Left Side - Vintage Letter */
         .vintage-photo {
             flex: 1;
             position: relative;
@@ -49,10 +49,10 @@
             background-size: cover;
             background-position: center;
             animation: zoomSlow 20s ease-in-out infinite alternate;
-            filter: brightness(0.25) sepia(0.3);
+            filter: brightness(0.3) sepia(0.4);
         }
 
-        /* Right Side - Modern Phone/Text Photo */
+        /* Right Side - Modern Gadgets/Internet */
         .digital-photo {
             flex: 1;
             position: relative;
@@ -66,23 +66,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=1000&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=1000&fit=crop');
             background-size: cover;
             background-position: center;
             animation: zoomSlow 25s ease-in-out infinite alternate-reverse;
-            filter: brightness(0.3) hue-rotate(10deg);
+            filter: brightness(0.35) hue-rotate(5deg);
         }
 
         @keyframes zoomSlow {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(1.15);
-            }
+            0% { transform: scale(1); }
+            100% { transform: scale(1.12); }
         }
 
-        /* Overlay gradient for better text readability */
         .vintage-photo::after {
             content: '';
             position: absolute;
@@ -90,7 +85,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(42, 24, 16, 0.85), rgba(26, 15, 10, 0.9));
+            background: linear-gradient(135deg, rgba(42, 24, 16, 0.88), rgba(26, 15, 10, 0.92));
             z-index: 1;
         }
 
@@ -101,15 +96,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(10, 14, 39, 0.85), rgba(6, 9, 20, 0.9));
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.88), rgba(6, 9, 20, 0.92));
             z-index: 1;
         }
 
         /* Floating animated elements */
-        .floating-paper {
+        .floating-item {
             position: fixed;
-            font-size: 3rem;
-            opacity: 0.15;
+            font-size: 2.5rem;
+            opacity: 0.2;
             pointer-events: none;
             z-index: 1;
             animation: floatAround 15s ease-in-out infinite;
@@ -118,15 +113,15 @@
         @keyframes floatAround {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
             25% { transform: translate(20px, -30px) rotate(5deg); }
-            50% { transform: translate(-10px, -50px) rotate(-3deg); }
-            75% { transform: translate(15px, -20px) rotate(4deg); }
+            50% { transform: translate(-15px, -45px) rotate(-3deg); }
+            75% { transform: translate(15px, -25px) rotate(4deg); }
         }
 
         /* Main container */
         .container {
             position: relative;
             z-index: 20;
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 1.5rem;
             min-height: 100vh;
@@ -138,8 +133,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
-            padding: 1rem 1.8rem;
-            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(20px);
             border-radius: 80px;
             border: 1px solid rgba(255, 193, 7, 0.3);
@@ -177,7 +172,7 @@
             color: transparent;
         }
 
-        /* Timer Section - BIGGER */
+        /* Timer */
         .timer-section {
             display: flex;
             align-items: center;
@@ -211,23 +206,21 @@
         .timer-btn:hover {
             background: #ffc107;
             color: #000;
-            transform: scale(1.02);
         }
 
-        /* Theme Header - Enhanced */
+        /* Theme Header */
         .theme-header {
             text-align: center;
-            margin: 2rem 0 2.5rem;
+            margin: 1.5rem 0 2rem;
         }
 
         .theme-header h2 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #ffc107, #ff8f00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px rgba(255, 193, 7, 0.3);
         }
 
         .contrast-line {
@@ -236,16 +229,16 @@
             justify-content: center;
             gap: 2rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .vintage-badge {
             font-family: 'Caveat', cursive;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #e8b88a;
             background: rgba(232, 184, 138, 0.15);
             padding: 0.4rem 1.5rem;
             border-radius: 60px;
-            backdrop-filter: blur(10px);
         }
 
         .vs {
@@ -264,11 +257,9 @@
             background: rgba(94, 224, 250, 0.15);
             padding: 0.4rem 1.5rem;
             border-radius: 60px;
-            backdrop-filter: blur(10px);
-            letter-spacing: 1px;
         }
 
-        /* Roles Section */
+        /* Roles */
         .roles-section {
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
@@ -290,7 +281,6 @@
             cursor: pointer;
             transition: all 0.2s;
             font-weight: 600;
-            font-size: 1rem;
         }
 
         .role.active {
@@ -316,7 +306,7 @@
             color: #000;
         }
 
-        /* Questions Grid - Split Design with BETTER VISIBILITY */
+        /* 2x2 Questions Grid - 4 questions on each side */
         .questions-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -324,139 +314,123 @@
             margin: 2rem 0;
         }
 
-        /* Vintage Column - Enhanced */
+        /* Vintage Column */
         .vintage-col {
-            background: rgba(42, 24, 16, 0.85);
+            background: rgba(42, 24, 16, 0.88);
             backdrop-filter: blur(12px);
             border-radius: 32px;
-            padding: 2rem;
+            padding: 1.8rem;
             border: 1px solid rgba(232, 184, 138, 0.4);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s;
-        }
-
-        .vintage-col:hover {
-            transform: translateY(-5px);
-            border-color: #e8b88a;
         }
 
         .vintage-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid #e8b88a;
         }
 
         .vintage-header .icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             animation: bounce 2s ease-in-out infinite;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-5px); }
         }
 
         .vintage-header h3 {
             font-family: 'Caveat', cursive;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #e8b88a;
-            margin-top: 0.5rem;
         }
 
         .vintage-header p {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #c9a575;
         }
 
-        /* Digital Column - Enhanced */
+        /* Digital Column */
         .digital-col {
-            background: rgba(10, 14, 39, 0.85);
+            background: rgba(10, 14, 39, 0.88);
             backdrop-filter: blur(12px);
             border-radius: 32px;
-            padding: 2rem;
+            padding: 1.8rem;
             border: 1px solid rgba(94, 224, 250, 0.4);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s;
-        }
-
-        .digital-col:hover {
-            transform: translateY(-5px);
-            border-color: #5ee0fa;
         }
 
         .digital-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid #5ee0fa;
         }
 
         .digital-header .icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             animation: pulse 1.5s ease-in-out infinite;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); text-shadow: 0 0 10px #5ee0fa; }
+            50% { transform: scale(1.1); }
         }
 
         .digital-header h3 {
             font-family: 'Space Grotesk', monospace;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #5ee0fa;
-            margin-top: 0.5rem;
         }
 
         .digital-header p {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #8a9eff;
         }
 
-        /* Question Cards - MUCH MORE VISIBLE */
+        /* Question Cards */
         .question-item {
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 24px;
-            padding: 1.5rem;
-            margin-bottom: 1.2rem;
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid transparent;
         }
 
         .vintage-col .question-item {
-            background: rgba(0, 0, 0, 0.7);
             border-left: 4px solid #e8b88a;
         }
 
         .vintage-col .question-item:hover {
             border-color: #e8b88a;
-            background: rgba(232, 184, 138, 0.15);
-            transform: translateX(8px);
+            background: rgba(232, 184, 138, 0.12);
+            transform: translateX(5px);
         }
 
         .digital-col .question-item {
-            background: rgba(0, 0, 0, 0.7);
             border-left: 4px solid #5ee0fa;
         }
 
         .digital-col .question-item:hover {
             border-color: #5ee0fa;
-            background: rgba(94, 224, 250, 0.1);
-            transform: translateX(8px);
+            background: rgba(94, 224, 250, 0.08);
+            transform: translateX(5px);
         }
 
         .question-item.completed {
-            background: rgba(255, 193, 7, 0.15);
+            background: rgba(255, 193, 7, 0.12);
             border-left: 4px solid #ffc107;
         }
 
         .question-part {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
             font-weight: 700;
         }
 
@@ -469,8 +443,8 @@
         }
 
         .question-text {
-            font-size: 1.2rem;
-            line-height: 1.55;
+            font-size: 1rem;
+            line-height: 1.5;
             font-weight: 600;
             color: #fff;
         }
@@ -492,12 +466,13 @@
         .progress-dots {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .dot {
-            width: 45px;
-            height: 45px;
-            border-radius: 16px;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
             background: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
@@ -506,20 +481,18 @@
             transition: all 0.2s;
             border: 1px solid rgba(255, 255, 255, 0.15);
             font-weight: 700;
-            font-size: 1rem;
         }
 
         .dot.completed {
             background: #ffc107;
             color: #000;
             font-weight: 800;
-            transform: scale(1.05);
         }
 
         .reset-progress {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 50px;
             color: #aaa;
             cursor: pointer;
@@ -532,7 +505,6 @@
             border-color: #ffc107;
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
             .questions-grid {
                 grid-template-columns: 1fr;
@@ -545,10 +517,10 @@
                 flex-direction: column;
             }
             .theme-header h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             .question-text {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -562,10 +534,11 @@
 </div>
 
 <!-- Floating animated elements -->
-<div class="floating-paper" style="top: 10%; left: 5%;">✍️📜</div>
-<div class="floating-paper" style="top: 70%; left: 15%; animation-duration: 18s;">💌✉️</div>
-<div class="floating-paper" style="top: 30%; right: 8%; animation-duration: 12s;">📱💬</div>
-<div class="floating-paper" style="bottom: 15%; right: 20%; animation-duration: 20s;">📲✨</div>
+<div class="floating-item" style="top: 8%; left: 3%;">✍️📜💌</div>
+<div class="floating-item" style="top: 75%; left: 10%; animation-duration: 18s;">🖋️✉️📮</div>
+<div class="floating-item" style="top: 20%; right: 5%; animation-duration: 12s;">📱💬📲</div>
+<div class="floating-item" style="bottom: 10%; right: 12%; animation-duration: 20s;">🌐📡💻</div>
+<div class="floating-item" style="top: 50%; left: 45%; animation-duration: 16s;">⚡📶</div>
 
 <div class="container">
     <!-- Navigation -->
@@ -581,11 +554,11 @@
 
     <!-- Theme Header -->
     <div class="theme-header">
-        <h2>✍️ Handwritten Letters <span style="color:#ffc107">✦</span> 📱 Text Messages</h2>
+        <h2>✍️ Handwritten Letters <span style="color:#ffc107">✦</span> 📱 Digital World</h2>
         <div class="contrast-line">
-            <span class="vintage-badge">🖋️ vintage warmth · personal touch</span>
+            <span class="vintage-badge">🖋️ vintage · personal · timeless</span>
             <span class="vs">VS</span>
-            <span class="digital-badge">⚡ digital speed · instant connect</span>
+            <span class="digital-badge">⚡ digital · instant · connected</span>
         </div>
     </div>
 
@@ -596,14 +569,14 @@
         <button class="swap-btn" id="swapBtn">⇄ Swap Roles</button>
     </div>
 
-    <!-- Questions Grid - Split Design -->
+    <!-- Questions Grid - 4 on each side -->
     <div class="questions-grid">
-        <!-- Vintage Column - Handwritten Letters Theme -->
+        <!-- Vintage Column - Letters & Traditional Communication -->
         <div class="vintage-col">
             <div class="vintage-header">
                 <div class="icon">✍️📜💌</div>
                 <h3>Handwritten Letters</h3>
-                <p>vintage · personal · timeless · meaningful</p>
+                <p>timeless · personal · meaningful</p>
             </div>
             <div class="question-item" data-qid="0">
                 <div class="question-part">📮 QUESTION 01</div>
@@ -613,14 +586,22 @@
                 <div class="question-part">💭 QUESTION 03</div>
                 <div class="question-text">"What do you think about face-to-face communication?"</div>
             </div>
+            <div class="question-item" data-qid="4">
+                <div class="question-part">🔮 QUESTION 05</div>
+                <div class="question-text">"Do you think handwritten letters will be common in the future?"</div>
+            </div>
+            <div class="question-item" data-qid="6">
+                <div class="question-part">📱❓ QUESTION 07</div>
+                <div class="question-text">"Do you think we depend too much on gadgets?"</div>
+            </div>
         </div>
 
-        <!-- Digital Column - Text Messages Theme -->
+        <!-- Digital Column - Text Messages & Digital Communication -->
         <div class="digital-col">
             <div class="digital-header">
                 <div class="icon">📱💬📲</div>
-                <h3>Text Messages</h3>
-                <p>digital · instant · connected · efficient</p>
+                <h3>Digital Communication</h3>
+                <p>instant · efficient · global</p>
             </div>
             <div class="question-item" data-qid="1">
                 <div class="question-part">📲 QUESTION 02</div>
@@ -629,6 +610,14 @@
             <div class="question-item" data-qid="3">
                 <div class="question-part">💬 QUESTION 04</div>
                 <div class="question-text">"How often do you text people?"</div>
+            </div>
+            <div class="question-item" data-qid="5">
+                <div class="question-part">⚡ QUESTION 06</div>
+                <div class="question-text">"What are the advantages of electronic communication?"</div>
+            </div>
+            <div class="question-item" data-qid="7">
+                <div class="question-part">🌐 QUESTION 08</div>
+                <div class="question-text">"What are the effects of the Internet on society?"</div>
             </div>
         </div>
     </div>
@@ -641,17 +630,12 @@
 </div>
 
 <script>
-    // Questions data
-    const QUESTIONS = [
-        { text: "Do you write letters?", side: "vintage" },
-        { text: "What method of communication do you prefer to contact people?", side: "digital" },
-        { text: "What do you think about face-to-face communication?", side: "vintage" },
-        { text: "How often do you text people?", side: "digital" }
-    ];
+    // 8 Questions total
+    const QUESTIONS_COUNT = 8;
 
     // State
     let completed = new Set();
-    let timeLeft = 240; // 4 minutes in seconds
+    let timeLeft = 240;
     let timerInterval = null;
     let isRunning = false;
     let roleAIsSpeaker = true;
@@ -665,31 +649,25 @@
     const roleB = document.getElementById('roleB');
     const resetProgressBtn = document.getElementById('resetProgressBtn');
 
-    // Update timer display
     function updateTimerDisplay() {
         const mins = Math.floor(timeLeft / 60);
         const secs = timeLeft % 60;
         timerDisplay.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
         
-        // Change color when low on time
         if (timeLeft <= 30) {
             timerDisplay.style.color = '#ff4444';
-            timerDisplay.style.textShadow = '0 0 10px #ff4444';
         } else if (timeLeft <= 60) {
             timerDisplay.style.color = '#ffaa44';
-            timerDisplay.style.textShadow = '0 0 5px #ffaa44';
         } else {
             timerDisplay.style.color = '#ffc107';
-            timerDisplay.style.textShadow = 'none';
         }
         
         if (timeLeft === 0 && isRunning) {
             stopTimer();
-            alert("⏰ Time's up! Great discussion!\n\nDid you cover all 4 questions?");
+            alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions?");
         }
     }
 
-    // Timer functions
     function startTimer() {
         if (isRunning) return;
         if (timeLeft <= 0) {
@@ -708,7 +686,7 @@
             }
             if (timeLeft === 0) {
                 stopTimer();
-                alert("⏰ Time's up! Great discussion!\n\nDid you cover all 4 questions?");
+                alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions?");
             }
         }, 1000);
     }
@@ -730,7 +708,6 @@
         updateTimerDisplay();
     }
 
-    // Toggle question completion
     function toggleQuestion(qid) {
         if (completed.has(qid)) {
             completed.delete(qid);
@@ -741,7 +718,6 @@
         updateDotsUI();
     }
 
-    // Update question card styling
     function updateQuestionsUI() {
         const questions = document.querySelectorAll('.question-item');
         questions.forEach((q, index) => {
@@ -753,11 +729,10 @@
         });
     }
 
-    // Update progress dots
     function updateDotsUI() {
         const dotsDiv = document.getElementById('progressDots');
         dotsDiv.innerHTML = '';
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < QUESTIONS_COUNT; i++) {
             const dot = document.createElement('div');
             dot.className = `dot ${completed.has(i) ? 'completed' : ''}`;
             dot.textContent = i + 1;
@@ -766,14 +741,12 @@
         }
     }
 
-    // Reset all progress
     function resetProgress() {
         completed.clear();
         updateQuestionsUI();
         updateDotsUI();
     }
 
-    // Role switching
     function updateRolesUI() {
         if (roleAIsSpeaker) {
             roleA.classList.add('active');
@@ -793,7 +766,6 @@
         updateRolesUI();
     }
 
-    // Attach click events to question items
     function attachQuestionEvents() {
         const questions = document.querySelectorAll('.question-item');
         questions.forEach((q, index) => {
@@ -801,7 +773,6 @@
         });
     }
 
-    // Initialize
     function init() {
         updateTimerDisplay();
         attachQuestionEvents();
