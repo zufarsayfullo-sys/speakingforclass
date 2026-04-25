@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speak Up · Communication | Letters vs Texts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Split background - Vintage vs Digital */
+        .split-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            z-index: 0;
+        }
+
+        .vintage-side {
+            flex: 1;
+            background: linear-gradient(135deg, #2a1810 0%, #1a0f0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vintage-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="rgba(255,200,150,0.04)" d="M10,10 L30,10 L30,30 L10,30 Z M40,40 L60,40 L60,60 L40,60 Z M70,70 L90,70 L90,90 L70,90 Z"/></svg>');
+            background-size: 60px 60px;
+        }
+
+        .digital-side {
+            flex: 1;
+            background: linear-gradient(135deg, #0a0e27 0%, #060914 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .digital-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 255, 0.04) 2px,
+                rgba(0, 255, 255, 0.04) 4px
+            );
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 193, 7, 0.15);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            padding: 0.6rem 1.3rem;
+            border-radius: 40px;
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background: #ffc107;
+            color: #000;
+            transform: translateX(-5px);
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffc107, #ff8f00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Timer Section */
+        .timer-section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .timer-display {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffc107;
+            letter-spacing: 2px;
+        }
+
+        .timer-btn {
+            background: rgba(255, 193, 7, 0.2);
+            border: none;
+            padding: 0.4rem 0.9rem;
+            border-radius: 40px;
+            color: #ffc107;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .timer-btn:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* Theme Header */
+        .theme-header {
+            text-align: center;
+            margin: 2rem 0 3rem;
+        }
+
+        .theme-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffc107, #ff8f00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contrast-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .vintage-badge {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: #d4a574;
+            background: rgba(180, 120, 80, 0.2);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+        }
+
+        .vs {
+            font-size: 1rem;
+            color: #ffc107;
+            font-weight: 700;
+        }
+
+        .digital-badge {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1rem;
+            color: #00e5ff;
+            background: rgba(0, 229, 255, 0.15);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            letter-spacing: 1px;
+        }
+
+        /* Roles Section */
+        .roles-section {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            padding: 0.7rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        .role {
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .role.active {
+            background: #ffc107;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .swap-btn {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: #ffc107;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .swap-btn:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* Questions Grid - Split Design */
+        .questions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Vintage Column */
+        .vintage-col {
+            background: rgba(42, 24, 16, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 1.5rem;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .vintage-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px dashed #d4a574;
+        }
+
+        .vintage-header .icon {
+            font-size: 2.5rem;
+        }
+
+        .vintage-header h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            color: #d4a574;
+        }
+
+        .vintage-header p {
+            font-size: 0.8rem;
+            color: #b8956a;
+        }
+
+        /* Digital Column */
+        .digital-col {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .digital-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #00e5ff;
+        }
+
+        .digital-header .icon {
+            font-size: 2.5rem;
+        }
+
+        .digital-header h3 {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.5rem;
+            color: #00e5ff;
+        }
+
+        .digital-header p {
+            font-size: 0.8rem;
+            color: #6c8eff;
+        }
+
+        /* Question Cards */
+        .question-item {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .vintage-col .question-item:hover {
+            border-color: #d4a574;
+            background: rgba(212, 165, 116, 0.1);
+            transform: translateX(5px);
+        }
+
+        .digital-col .question-item:hover {
+            border-color: #00e5ff;
+            background: rgba(0, 229, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .question-item.completed {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+        }
+
+        .question-part {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .vintage-col .question-part {
+            color: #d4a574;
+        }
+
+        .digital-col .question-part {
+            color: #00e5ff;
+        }
+
+        .question-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+        }
+
+        .dot.completed {
+            background: #ffc107;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .reset-progress {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .reset-progress:hover {
+            color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .questions-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .timer-display {
+                font-size: 1.3rem;
+            }
+            .nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Split Background -->
+<div class="split-bg">
+    <div class="vintage-side"></div>
+    <div class="digital-side"></div>
+</div>
+
+<div class="container">
+    <!-- Navigation -->
+    <div class="nav">
+        <a href="../index.html" class="back-btn">← Back to Menu</a>
+        <h1 class="topic-title">💬 Communication</h1>
+        <div class="timer-section">
+            <span class="timer-display" id="timerDisplay">4:00</span>
+            <button class="timer-btn" id="startBtn">▶ START</button>
+            <button class="timer-btn" id="resetBtn">⟳ RESET</button>
+        </div>
+    </div>
+
+    <!-- Theme Header -->
+    <div class="theme-header">
+        <h2>Handwritten Letters <span style="color:#ffc107">✧</span> Text Messages</h2>
+        <div class="contrast-line">
+            <span class="vintage-badge">✍️ vintage warmth</span>
+            <span class="vs">VS</span>
+            <span class="digital-badge">📱 digital speed</span>
+        </div>
+    </div>
+
+    <!-- Roles -->
+    <div class="roles-section">
+        <div class="role active" id="roleA">🎤 Speaker A</div>
+        <div class="role" id="roleB">👂 Listener B</div>
+        <button class="swap-btn" id="swapBtn">⇄ Swap Roles</button>
+    </div>
+
+    <!-- Questions Grid - Split Design -->
+    <div class="questions-grid">
+        <!-- Vintage Column - Handwritten Letters Theme -->
+        <div class="vintage-col">
+            <div class="vintage-header">
+                <div class="icon">✍️📜</div>
+                <h3>Handwritten Letters</h3>
+                <p>vintage · personal · timeless</p>
+            </div>
+            <div class="question-item" data-qid="0">
+                <div class="question-part">QUESTION 01</div>
+                <div class="question-text">📮 Do you write letters?</div>
+            </div>
+            <div class="question-item" data-qid="2">
+                <div class="question-part">QUESTION 03</div>
+                <div class="question-text">💭 What do you think about face-to-face communication?</div>
+            </div>
+        </div>
+
+        <!-- Digital Column - Text Messages Theme -->
+        <div class="digital-col">
+            <div class="digital-header">
+                <div class="icon">📱💬</div>
+                <h3>Text Messages</h3>
+                <p>digital · instant · connected</p>
+            </div>
+            <div class="question-item" data-qid="1">
+                <div class="question-part">QUESTION 02</div>
+                <div class="question-text">📲 What method of communication do you prefer to contact people?</div>
+            </div>
+            <div class="question-item" data-qid="3">
+                <div class="question-part">QUESTION 04</div>
+                <div class="question-text">💬 How often do you text people?</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Section -->
+    <div class="progress-section">
+        <div class="progress-dots" id="progressDots"></div>
+        <button class="reset-progress" id="resetProgressBtn">Reset Progress</button>
+    </div>
+</div>
+
+<script>
+    // Questions data
+    const QUESTIONS = [
+        { text: "Do you write letters?", side: "vintage" },
+        { text: "What method of communication do you prefer to contact people?", side: "digital" },
+        { text: "What do you think about face-to-face communication?", side: "vintage" },
+        { text: "How often do you text people?", side: "digital" }
+    ];
+
+    // State
+    let completed = new Set();
+    let timeLeft = 240; // 4 minutes in seconds
+    let timerInterval = null;
+    let isRunning = false;
+    let roleAIsSpeaker = true;
+
+    // DOM Elements
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    const roleA = document.getElementById('roleA');
+    const roleB = document.getElementById('roleB');
+    const resetProgressBtn = document.getElementById('resetProgressBtn');
+
+    // Update timer display
+    function updateTimerDisplay() {
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        timerDisplay.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        
+        // Change color when low on time
+        if (timeLeft <= 30) {
+            timerDisplay.style.color = '#ff4444';
+        } else if (timeLeft <= 60) {
+            timerDisplay.style.color = '#ffaa44';
+        } else {
+            timerDisplay.style.color = '#ffc107';
+        }
+        
+        if (timeLeft === 0 && isRunning) {
+            stopTimer();
+            alert("⏰ Time's up! Great discussion!\n\nDid you cover all 4 questions?");
+        }
+    }
+
+    // Timer functions
+    function startTimer() {
+        if (isRunning) return;
+        if (timeLeft <= 0) {
+            timeLeft = 240;
+            updateTimerDisplay();
+        }
+        isRunning = true;
+        startBtn.textContent = '⏸ PAUSE';
+        startBtn.style.background = '#ffc107';
+        startBtn.style.color = '#000';
+        
+        timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplay();
+            }
+            if (timeLeft === 0) {
+                stopTimer();
+                alert("⏰ Time's up! Great discussion!\n\nDid you cover all 4 questions?");
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        isRunning = false;
+        startBtn.textContent = '▶ START';
+        startBtn.style.background = 'rgba(255, 193, 7, 0.2)';
+        startBtn.style.color = '#ffc107';
+    }
+
+    function resetTimer() {
+        stopTimer();
+        timeLeft = 240;
+        updateTimerDisplay();
+    }
+
+    // Toggle question completion
+    function toggleQuestion(qid) {
+        if (completed.has(qid)) {
+            completed.delete(qid);
+        } else {
+            completed.add(qid);
+        }
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    // Update question card styling
+    function updateQuestionsUI() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            if (completed.has(index)) {
+                q.classList.add('completed');
+            } else {
+                q.classList.remove('completed');
+            }
+        });
+    }
+
+    // Update progress dots
+    function updateDotsUI() {
+        const dotsDiv = document.getElementById('progressDots');
+        dotsDiv.innerHTML = '';
+        for (let i = 0; i < 4; i++) {
+            const dot = document.createElement('div');
+            dot.className = `dot ${completed.has(i) ? 'completed' : ''}`;
+            dot.textContent = i + 1;
+            dot.onclick = () => toggleQuestion(i);
+            dotsDiv.appendChild(dot);
+        }
+    }
+
+    // Reset all progress
+    function resetProgress() {
+        completed.clear();
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    // Role switching
+    function updateRolesUI() {
+        if (roleAIsSpeaker) {
+            roleA.classList.add('active');
+            roleB.classList.remove('active');
+            roleA.innerHTML = '🎤 Speaker A';
+            roleB.innerHTML = '👂 Listener B';
+        } else {
+            roleB.classList.add('active');
+            roleA.classList.remove('active');
+            roleB.innerHTML = '🎤 Speaker B';
+            roleA.innerHTML = '👂 Listener A';
+        }
+    }
+
+    function swapRoles() {
+        roleAIsSpeaker = !roleAIsSpeaker;
+        updateRolesUI();
+    }
+
+    // Attach click events to question items
+    function attachQuestionEvents() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            q.onclick = () => toggleQuestion(index);
+        });
+    }
+
+    // Initialize
+    function init() {
+        updateTimerDisplay();
+        attachQuestionEvents();
+        updateDotsUI();
+        updateRolesUI();
+        
+        startBtn.onclick = startTimer;
+        resetBtn.onclick = resetTimer;
+        swapBtn.onclick = swapRoles;
+        resetProgressBtn.onclick = resetProgress;
+    }
+
+    init();
+</script>
+</body>
+</html>
