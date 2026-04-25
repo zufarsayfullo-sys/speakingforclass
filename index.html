@@ -169,7 +169,6 @@
             border: 1px solid rgba(255, 193, 7, 0.1);
             position: relative;
             animation: fadeInUp 0.6s ease backwards;
-            animation-delay: calc(var(--i, 0) * 0.03s);
         }
 
         @keyframes fadeInUp {
@@ -274,7 +273,7 @@
             transform: translateX(5px);
         }
 
-        /* FLOATING STATIC RANDOM BUTTON - Always visible bottom right */
+        /* FLOATING STATIC RANDOM BUTTON */
         .floating-random {
             position: fixed;
             bottom: 2rem;
@@ -356,26 +355,23 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive random button for mobile */
         @media (max-width: 768px) {
             .floating-random {
                 bottom: 1rem;
                 right: 1rem;
-                left: auto;
             }
             .random-btn {
                 padding: 0.8rem 1.5rem;
             }
             .random-text {
-                display: inline-block;
                 font-size: 0.8rem;
             }
-            .random-icon {
-                font-size: 1.2rem;
+            .logo {
+                font-size: 3rem;
             }
         }
 
-        /* Random Modal */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -388,18 +384,8 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s ease;
         }
-
-        .modal.show {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
+        .modal.show { display: flex; }
         .modal-content {
             background: #111;
             border-radius: 32px;
@@ -410,7 +396,6 @@
             border: 2px solid #ffc107;
             animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-
         @keyframes modalPop {
             from {
                 opacity: 0;
@@ -421,67 +406,20 @@
                 transform: scale(1) translateY(0);
             }
         }
-
-        .modal-emoji {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            animation: bounce 0.5s ease;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .modal-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #ffc107;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-desc {
-            color: #888;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
+        .modal-emoji { font-size: 4rem; margin-bottom: 1rem; }
+        .modal-title { font-size: 1.8rem; font-weight: 700; color: #ffc107; }
+        .modal-desc { color: #888; margin: 1rem 0; }
+        .modal-buttons { display: flex; gap: 1rem; justify-content: center; }
         .modal-btn {
             padding: 0.8rem 1.8rem;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
             border: none;
-            font-family: inherit;
         }
+        .modal-btn-primary { background: #ffc107; color: #000; }
+        .modal-btn-secondary { background: rgba(255,255,255,0.1); color: #fff; }
 
-        .modal-btn-primary {
-            background: #ffc107;
-            color: #000;
-        }
-
-        .modal-btn-primary:hover {
-            background: #ff8f00;
-            transform: translateY(-2px);
-        }
-
-        .modal-btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .modal-btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Footer */
         .footer {
             text-align: center;
             padding: 2rem 0 1rem;
@@ -513,7 +451,7 @@
     </div>
 </div>
 
-<!-- FLOATING STATIC RANDOM BUTTON - Always visible -->
+<!-- FLOATING RANDOM BUTTON -->
 <div class="floating-random">
     <button class="random-btn" id="randomBtn">
         <span class="random-icon">🎲</span>
@@ -522,7 +460,7 @@
     </button>
 </div>
 
-<!-- Random Topic Modal -->
+<!-- Modal -->
 <div class="modal" id="randomModal">
     <div class="modal-content">
         <div class="modal-emoji" id="modalEmoji">🎲</div>
@@ -536,33 +474,32 @@
 </div>
 
 <script>
-    // 20 TOPICS with unique images and descriptions
+    // 20 TOPICS with their file paths - IMPORTANT: This links to your files!
     const TOPICS = [
-        { id: 'A', name: 'Communication', tag: 'Society', color: '#ffc107', image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&h=400&fit=crop', desc: 'Discuss how we connect in the digital age', questions: 4 },
-        { id: 'B', name: 'Binge Watching', tag: 'Media', color: '#ffc107', image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&h=400&fit=crop', desc: 'Streaming habits and modern entertainment', questions: 4 },
-        { id: 'C', name: 'Family & Regrets', tag: 'Personal', color: '#ffc107', image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&h=400&fit=crop', desc: 'Reflect on relationships and life choices', questions: 4 },
-        { id: 'D', name: 'Culture', tag: 'Society', color: '#ffc107', image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600&h=400&fit=crop', desc: 'Explore traditions and global perspectives', questions: 4 },
-        { id: 'E', name: 'Technology', tag: 'Digital', color: '#ffc107', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop', desc: 'AI, gadgets, and the future of innovation', questions: 4 },
-        { id: 'F', name: 'Money & Investing', tag: 'Finance', color: '#ffc107', image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop', desc: 'Smart spending, saving, and wealth', questions: 4 },
-        { id: 'G', name: 'Crime & Safety', tag: 'Law', color: '#ffc107', image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop', desc: 'Justice, security, and safer communities', questions: 4 },
-        { id: 'H', name: 'Emotions', tag: 'Psychology', color: '#ffc107', image: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=600&h=400&fit=crop', desc: 'Feelings, empathy, and mental wellness', questions: 4 },
-        { id: 'I', name: 'Career & Creativity', tag: 'Future', color: '#ffc107', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop', desc: 'Work, innovation, and creative thinking', questions: 4 },
-        { id: 'J', name: 'Memory & Life', tag: 'Philosophy', color: '#ffc107', image: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=600&h=400&fit=crop', desc: 'Nostalgia, growth, and life stages', questions: 4 },
-        { id: 'K', name: 'Social Media', tag: 'Digital', color: '#ffc107', image: 'https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=600&h=400&fit=crop', desc: 'Influence, addiction, and online culture', questions: 4 },
-        { id: 'L', name: 'Travel', tag: 'Adventure', color: '#ffc107', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop', desc: 'Journeys, cultures, and wanderlust', questions: 4 },
-        { id: 'M', name: 'Education', tag: 'Learning', color: '#ffc107', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop', desc: 'Schools, skills, and lifelong learning', questions: 4 },
-        { id: 'N', name: 'Health & Fitness', tag: 'Wellness', color: '#ffc107', image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=400&fit=crop', desc: 'Exercise, nutrition, and well-being', questions: 4 },
-        { id: 'O', name: 'Environment', tag: 'Nature', color: '#ffc107', image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop', desc: 'Climate change and conservation', questions: 4 },
-        { id: 'P', name: 'Leadership', tag: 'Work', color: '#ffc107', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop', desc: 'Guiding teams and making decisions', questions: 4 },
-        { id: 'Q', name: 'Art & Design', tag: 'Creative', color: '#ffc107', image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&h=400&fit=crop', desc: 'Creativity, aesthetics, and expression', questions: 4 },
-        { id: 'R', name: 'Future Predictions', tag: 'Futurism', color: '#ffc107', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop', desc: 'Tomorrow\'s world and possibilities', questions: 4 },
-        { id: 'S', name: 'Food & Cuisine', tag: 'Gastronomy', color: '#ffc107', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop', desc: 'Cooking, flavors, and food culture', questions: 4 },
-        { id: 'T', name: 'Happiness', tag: 'Philosophy', color: '#ffc107', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop', desc: 'What truly makes us happy?', questions: 4 }
+        { name: 'Communication', tag: 'Society', image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&h=400&fit=crop', desc: 'Discuss how we connect in the digital age', questions: 4, file: 'topics/communication.html' },
+        { name: 'Binge Watching', tag: 'Media', image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&h=400&fit=crop', desc: 'Streaming habits and modern entertainment', questions: 4, file: 'topics/binge-watching.html' },
+        { name: 'Family & Regrets', tag: 'Personal', image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&h=400&fit=crop', desc: 'Reflect on relationships and life choices', questions: 4, file: 'topics/family-regrets.html' },
+        { name: 'Culture', tag: 'Society', image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600&h=400&fit=crop', desc: 'Explore traditions and global perspectives', questions: 4, file: 'topics/culture.html' },
+        { name: 'Technology', tag: 'Digital', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop', desc: 'AI, gadgets, and the future of innovation', questions: 4, file: 'topics/technology.html' },
+        { name: 'Money & Investing', tag: 'Finance', image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop', desc: 'Smart spending, saving, and wealth', questions: 4, file: 'topics/money-investing.html' },
+        { name: 'Crime & Safety', tag: 'Law', image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop', desc: 'Justice, security, and safer communities', questions: 4, file: 'topics/crime-safety.html' },
+        { name: 'Emotions', tag: 'Psychology', image: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=600&h=400&fit=crop', desc: 'Feelings, empathy, and mental wellness', questions: 4, file: 'topics/emotions.html' },
+        { name: 'Career & Creativity', tag: 'Future', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop', desc: 'Work, innovation, and creative thinking', questions: 4, file: 'topics/career-creativity.html' },
+        { name: 'Memory & Life', tag: 'Philosophy', image: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=600&h=400&fit=crop', desc: 'Nostalgia, growth, and life stages', questions: 4, file: 'topics/memory-life.html' },
+        { name: 'Social Media', tag: 'Digital', image: 'https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=600&h=400&fit=crop', desc: 'Influence, addiction, and online culture', questions: 4, file: 'topics/social-media.html' },
+        { name: 'Travel', tag: 'Adventure', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop', desc: 'Journeys, cultures, and wanderlust', questions: 4, file: 'topics/travel.html' },
+        { name: 'Education', tag: 'Learning', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop', desc: 'Schools, skills, and lifelong learning', questions: 4, file: 'topics/education.html' },
+        { name: 'Health & Fitness', tag: 'Wellness', image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=400&fit=crop', desc: 'Exercise, nutrition, and well-being', questions: 4, file: 'topics/health-fitness.html' },
+        { name: 'Environment', tag: 'Nature', image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop', desc: 'Climate change and conservation', questions: 4, file: 'topics/environment.html' },
+        { name: 'Leadership', tag: 'Work', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop', desc: 'Guiding teams and making decisions', questions: 4, file: 'topics/leadership.html' },
+        { name: 'Art & Design', tag: 'Creative', image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&h=400&fit=crop', desc: 'Creativity, aesthetics, and expression', questions: 4, file: 'topics/art-design.html' },
+        { name: 'Future Predictions', tag: 'Futurism', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop', desc: 'Tomorrow\'s world and possibilities', questions: 4, file: 'topics/future-predictions.html' },
+        { name: 'Food & Cuisine', tag: 'Gastronomy', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop', desc: 'Cooking, flavors, and food culture', questions: 4, file: 'topics/food-cuisine.html' },
+        { name: 'Happiness', tag: 'Philosophy', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop', desc: 'What truly makes us happy?', questions: 4, file: 'topics/happiness.html' }
     ];
 
     let pendingRandomTopic = null;
 
-    // Create floating particles
     function createParticles() {
         const particlesContainer = document.getElementById('particles');
         for (let i = 0; i < 50; i++) {
@@ -578,11 +515,10 @@
         }
     }
 
-    // Render topics grid
     function renderTopics() {
         const grid = document.getElementById('topicsGrid');
         grid.innerHTML = TOPICS.map((topic, index) => `
-            <div class="topic-card" style="animation-delay: ${index * 0.03}s" data-topic-id="${topic.id}">
+            <div class="topic-card" style="animation-delay: ${index * 0.03}s" data-topic-index="${index}">
                 <div class="card-image" style="background-image: url('${topic.image}')">
                     <span class="card-tag">${topic.tag}</span>
                 </div>
@@ -597,23 +533,16 @@
             </div>
         `).join('');
 
-        // Add click listeners
-        document.querySelectorAll('.topic-card').forEach((card, index) => {
+        // Add click event to each card
+        document.querySelectorAll('.topic-card').forEach((card, idx) => {
             card.addEventListener('click', () => {
-                const topic = TOPICS[index];
-                openTopic(topic);
+                const topic = TOPICS[idx];
+                // Navigate to the topic's HTML file
+                window.location.href = topic.file;
             });
         });
     }
 
-    // Open topic (placeholder - will link to actual topic pages)
-    function openTopic(topic) {
-        // For now, show alert since we're just building the menu
-        // In production, this would navigate to: `topics/${topic.name.toLowerCase().replace(/ /g, '-')}.html`
-        alert(`Opening: ${topic.name}\n\nIn the full platform, this would load the discussion page with timer and 4 questions.`);
-    }
-
-    // Random button with animation
     function animateRandomIcon() {
         const btn = document.querySelector('.random-btn');
         const icons = document.querySelectorAll('.random-icon');
@@ -638,7 +567,6 @@
         const modalTitle = document.getElementById('modalTitle');
         const modalDesc = document.getElementById('modalDesc');
         
-        // Animated emoji based on topic
         const emojis = ['🎲', '💬', '🎯', '💡', '🔥', '✨', '🎤', '💭'];
         modalEmoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
         modalTitle.textContent = pendingRandomTopic.name;
@@ -649,7 +577,7 @@
 
     function confirmRandomTopic() {
         if (pendingRandomTopic) {
-            openTopic(pendingRandomTopic);
+            window.location.href = pendingRandomTopic.file;
         }
         closeModal();
     }
@@ -659,11 +587,9 @@
         pendingRandomTopic = null;
     }
 
-    // Initialize
     createParticles();
     renderTopics();
     
-    // Event listeners
     document.getElementById('randomBtn').addEventListener('click', () => {
         animateRandomIcon();
         setTimeout(showRandomTopic, 200);
@@ -671,46 +597,10 @@
     document.getElementById('modalConfirmBtn').addEventListener('click', confirmRandomTopic);
     document.getElementById('modalCancelBtn').addEventListener('click', closeModal);
     
-    // Close modal on background click
     document.getElementById('randomModal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('randomModal')) {
             closeModal();
         }
-    });
-
-    // Add hover shine effect to cards
-    const style = document.createElement('style');
-    style.textContent = `
-        .topic-card {
-            --mouse-x: 0px;
-            --mouse-y: 0px;
-        }
-        .topic-card:hover::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 193, 7, 0.15), transparent 70%);
-            pointer-events: none;
-            border-radius: 24px;
-        }
-    `;
-    document.head.appendChild(style);
-
-    // Track mouse position for shine effect
-    document.addEventListener('mousemove', (e) => {
-        const cards = document.querySelectorAll('.topic-card');
-        cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            }
-        });
     });
 </script>
 </body>
