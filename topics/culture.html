@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speak Up · Culture | London Theme · Global Traditions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* London Theme Background - Phone Box + London Eye */
+        .london-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #000000 0%, #1a0a00 100%);
+        }
+
+        /* Phone Box Photo - Left Side */
+        .phonebox-photo {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 60%;
+            background-image: url('https://images.unsplash.com/photo-1553882809-f4f3c6f2c156?w=800&h=600&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: 0;
+            filter: brightness(0.7) sepia(0.3);
+            border-top-right-radius: 120px;
+        }
+
+        /* London Eye Photo - Right Side */
+        .londoneye-photo {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 50%;
+            height: 60%;
+            background-image: url('https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800&h=600&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: 0;
+            filter: brightness(0.7) hue-rotate(5deg);
+            border-top-left-radius: 120px;
+        }
+
+        /* Animated overlay gradient */
+        .overlay-grad {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 30%, rgba(0,0,0,0.4), rgba(0,0,0,0.85));
+            z-index: 0;
+        }
+
+        /* Floating London Icons */
+        .floating {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatLondon 20s ease-in-out infinite;
+        }
+
+        @keyframes floatLondon {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -25px) rotate(3deg); }
+            50% { transform: translate(-15px, -35px) rotate(-2deg); }
+            75% { transform: translate(18px, -20px) rotate(4deg); }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 20;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 80px;
+            border: 1px solid #ffc107;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid #ffc107;
+            padding: 0.6rem 1.3rem;
+            border-radius: 50px;
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background: #ffc107;
+            color: #000;
+            transform: translateX(-5px);
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffc107;
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        /* Timer */
+        .timer-section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.4rem 1.2rem;
+            border-radius: 80px;
+            border: 1px solid #ffc107;
+        }
+
+        .timer-display {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffc107;
+            letter-spacing: 3px;
+        }
+
+        .timer-btn {
+            background: rgba(255, 193, 7, 0.25);
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            color: #ffc107;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .timer-btn:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* Header */
+        .theme-header {
+            text-align: center;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .theme-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffc107;
+            text-shadow: 0 0 20px rgba(255, 193, 7, 0.4);
+        }
+
+        .theme-header p {
+            color: #ffc107aa;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .london-badge {
+            display: inline-block;
+            background: rgba(255, 193, 7, 0.15);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            color: #ffc107;
+        }
+
+        /* Roles */
+        .roles-section {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            border: 1px solid #ffc107;
+        }
+
+        .role {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .role.active {
+            background: #ffc107;
+            color: #000;
+            font-weight: 800;
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .swap-btn {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid #ffc107;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #ffc107;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .swap-btn:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* 2 Columns */
+        .questions-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        /* Part 1 Column */
+        .part1-col {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            border: 1px solid #ffc107;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .part-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        .part-header .icon {
+            font-size: 2rem;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .part-header h3 {
+            font-size: 1.3rem;
+            color: #ffc107;
+            margin-top: 0.3rem;
+        }
+
+        .part-header .sub {
+            font-size: 0.7rem;
+            color: #ffc107aa;
+        }
+
+        /* Part 2 Column */
+        .part2-col {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            border: 1px solid #ffc107;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Question Cards with Culture Icons */
+        .question-item {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 18px;
+            padding: 0.9rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .question-item:hover {
+            border-color: #ffc107;
+            background: rgba(255, 193, 7, 0.08);
+            transform: translateX(5px);
+        }
+
+        .question-item.completed {
+            background: rgba(255, 193, 7, 0.12);
+            border-left: 4px solid #ffc107;
+        }
+
+        /* Culture Icon */
+        .culture-icon {
+            font-size: 1.6rem;
+            min-width: 48px;
+            text-align: center;
+            filter: drop-shadow(0 0 5px rgba(255, 193, 7, 0.3));
+        }
+
+        /* Different animation delays */
+        .question-item:nth-child(1) .culture-icon { animation: pulse 2s ease-in-out infinite; animation-delay: 0s; }
+        .question-item:nth-child(2) .culture-icon { animation: pulse 2s ease-in-out infinite; animation-delay: 0.3s; }
+        .question-item:nth-child(3) .culture-icon { animation: pulse 2s ease-in-out infinite; animation-delay: 0.6s; }
+        .question-item:nth-child(4) .culture-icon { animation: pulse 2s ease-in-out infinite; animation-delay: 0.9s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .question-content {
+            flex: 1;
+        }
+
+        .q-culture {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            color: #ffc107;
+        }
+
+        .question-text {
+            font-size: 0.9rem;
+            line-height: 1.45;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid #ffc107;
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            font-weight: 700;
+            color: #ffc107aa;
+        }
+
+        .dot.completed {
+            background: #ffc107;
+            color: #000;
+            font-weight: 800;
+            border-color: #ffc107;
+        }
+
+        .reset-progress {
+            background: rgba(255, 193, 7, 0.15);
+            border: 1px solid #ffc107;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #ffc107;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .reset-progress:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: #ffc10766;
+        }
+
+        @media (max-width: 900px) {
+            .questions-wrapper {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .timer-display {
+                font-size: 1.3rem;
+            }
+            .nav {
+                flex-direction: column;
+            }
+            .theme-header h2 {
+                font-size: 1.4rem;
+            }
+            .phonebox-photo, .londoneye-photo {
+                height: 40%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- London Theme Background -->
+<div class="london-bg"></div>
+<div class="phonebox-photo"></div>
+<div class="londoneye-photo"></div>
+<div class="overlay-grad"></div>
+
+<!-- Floating London Icons -->
+<div class="floating" style="top: 8%; left: 5%;">📞🔴🇬🇧</div>
+<div class="floating" style="top: 70%; left: 10%; animation-duration: 18s;">🎡💂‍♂️</div>
+<div class="floating" style="top: 15%; right: 8%; animation-duration: 16s;">🚂☕</div>
+<div class="floating" style="bottom: 12%; right: 15%; animation-duration: 22s;">👑🎭</div>
+<div class="floating" style="top: 45%; left: 85%; animation-duration: 14s;">🌍✨</div>
+<div class="floating" style="top: 55%; left: 12%; animation-duration: 24s;">🎪🍽️</div>
+
+<div class="container">
+    <!-- Navigation -->
+    <div class="nav">
+        <a href="../index.html" class="back-btn">← Back to Menu</a>
+        <h1 class="topic-title">🌍 CULTURE</h1>
+        <div class="timer-section">
+            <span class="timer-display" id="timerDisplay">4:00</span>
+            <button class="timer-btn" id="startBtn">▶ START</button>
+            <button class="timer-btn" id="resetBtn">⟳ RESET</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="theme-header">
+        <h2>🇬🇧 LONDON · TRADITIONS · GLOBAL CULTURES 🎡</h2>
+        <p>Exploring languages, festivals, food, and traditions from around the world</p>
+        <div class="london-badge">📞 Red Phone Box · 🎡 London Eye · 🏰 Big Ben</div>
+    </div>
+
+    <!-- Roles -->
+    <div class="roles-section">
+        <div class="role active" id="roleA">🎤 Speaker A</div>
+        <div class="role" id="roleB">👂 Listener B</div>
+        <button class="swap-btn" id="swapBtn">⇄ Swap Roles</button>
+    </div>
+
+    <!-- 2 Columns -->
+    <div class="questions-wrapper">
+        <!-- Part 1: Personal Culture Questions -->
+        <div class="part1-col">
+            <div class="part-header">
+                <div class="icon">🗣️🌍📚</div>
+                <h3>PART 1 · Personal Culture</h3>
+                <div class="sub">language · media · festivals · food</div>
+            </div>
+            
+            <div class="question-item" data-qid="0">
+                <div class="culture-icon">🗣️🇬🇧</div>
+                <div class="question-content">
+                    <div class="q-culture">LANGUAGE LEARNING</div>
+                    <div class="question-text">"Why are you learning English?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="1">
+                <div class="culture-icon">📰📱</div>
+                <div class="question-content">
+                    <div class="q-culture">MEDIA CONSUMPTION</div>
+                    <div class="question-text">"Do you read the news in English?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="2">
+                <div class="culture-icon">🎉🎭</div>
+                <div class="question-content">
+                    <div class="q-culture">FESTIVALS</div>
+                    <div class="question-text">"What cultural events or festivals do you attend?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="3">
+                <div class="culture-icon">🍜🍕</div>
+                <div class="question-content">
+                    <div class="q-culture">CULINARY ADVENTURE</div>
+                    <div class="question-text">"Do you enjoy trying new foods from different cuisines?"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Part 2: Cultural Exploration -->
+        <div class="part2-col">
+            <div class="part-header">
+                <div class="icon">🌏🎡🎭</div>
+                <h3>PART 2 · Cultural Exploration</h3>
+                <div class="sub">foreign cultures · traditions · new horizons</div>
+            </div>
+            
+            <div class="question-item" data-qid="4">
+                <div class="culture-icon">🏯🇯🇵</div>
+                <div class="question-content">
+                    <div class="q-culture">FOREIGN CULTURE</div>
+                    <div class="question-text">"Speak about a foreign culture you know or like."</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="5">
+                <div class="culture-icon">🎪🇬🇧</div>
+                <div class="question-content">
+                    <div class="q-culture">LOCAL TRADITIONS</div>
+                    <div class="question-text">"Describe a popular cultural event in your country."</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="6">
+                <div class="culture-icon">💡🤔</div>
+                <div class="question-content">
+                    <div class="q-culture">SIGNIFICANCE</div>
+                    <div class="question-text">"Why do you think this event is important?"</div>
+                </div>
+            </div>
+            
+            <div class="question-item" data-qid="7">
+                <div class="culture-icon">✈️🌏</div>
+                <div class="question-content">
+                    <div class="q-culture">FUTURE EXPLORATION</div>
+                    <div class="question-text">"What new culture would you like to explore and why?"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Section -->
+    <div class="progress-section">
+        <div class="progress-dots" id="progressDots"></div>
+        <button class="reset-progress" id="resetProgressBtn">⟳ Reset Progress</button>
+    </div>
+    
+    <div class="footer">
+        🌍 Click any question to mark as completed · Share your cultural experiences with your partner! 🎡
+    </div>
+</div>
+
+<script>
+    const QUESTIONS_COUNT = 8;
+
+    let completed = new Set();
+    let timeLeft = 240;
+    let timerInterval = null;
+    let isRunning = false;
+    let roleAIsSpeaker = true;
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    const roleA = document.getElementById('roleA');
+    const roleB = document.getElementById('roleB');
+    const resetProgressBtn = document.getElementById('resetProgressBtn');
+
+    function updateTimerDisplay() {
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        timerDisplay.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        
+        if (timeLeft <= 30) {
+            timerDisplay.style.color = '#ff4444';
+            timerDisplay.style.textShadow = '0 0 10px #ff4444';
+        } else if (timeLeft <= 60) {
+            timerDisplay.style.color = '#ffaa44';
+            timerDisplay.style.textShadow = '0 0 5px #ffaa44';
+        } else {
+            timerDisplay.style.color = '#ffc107';
+            timerDisplay.style.textShadow = 'none';
+        }
+        
+        if (timeLeft === 0 && isRunning) {
+            stopTimer();
+            alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions? 🌍");
+        }
+    }
+
+    function startTimer() {
+        if (isRunning) return;
+        if (timeLeft <= 0) {
+            timeLeft = 240;
+            updateTimerDisplay();
+        }
+        isRunning = true;
+        startBtn.textContent = '⏸ PAUSE';
+        startBtn.style.background = '#ffc107';
+        startBtn.style.color = '#000';
+        
+        timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplay();
+            }
+            if (timeLeft === 0) {
+                stopTimer();
+                alert("⏰ Time's up! Great discussion!\n\nDid you cover all 8 questions? 🌍");
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        isRunning = false;
+        startBtn.textContent = '▶ START';
+        startBtn.style.background = 'rgba(255, 193, 7, 0.25)';
+        startBtn.style.color = '#ffc107';
+    }
+
+    function resetTimer() {
+        stopTimer();
+        timeLeft = 240;
+        updateTimerDisplay();
+    }
+
+    function toggleQuestion(qid) {
+        if (completed.has(qid)) {
+            completed.delete(qid);
+        } else {
+            completed.add(qid);
+        }
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    function updateQuestionsUI() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            if (completed.has(index)) {
+                q.classList.add('completed');
+            } else {
+                q.classList.remove('completed');
+            }
+        });
+    }
+
+    function updateDotsUI() {
+        const dotsDiv = document.getElementById('progressDots');
+        dotsDiv.innerHTML = '';
+        for (let i = 0; i < QUESTIONS_COUNT; i++) {
+            const dot = document.createElement('div');
+            dot.className = `dot ${completed.has(i) ? 'completed' : ''}`;
+            dot.textContent = i + 1;
+            dot.onclick = () => toggleQuestion(i);
+            dotsDiv.appendChild(dot);
+        }
+    }
+
+    function resetProgress() {
+        completed.clear();
+        updateQuestionsUI();
+        updateDotsUI();
+    }
+
+    function updateRolesUI() {
+        if (roleAIsSpeaker) {
+            roleA.classList.add('active');
+            roleB.classList.remove('active');
+            roleA.innerHTML = '🎤 Speaker A';
+            roleB.innerHTML = '👂 Listener B';
+        } else {
+            roleB.classList.add('active');
+            roleA.classList.remove('active');
+            roleB.innerHTML = '🎤 Speaker B';
+            roleA.innerHTML = '👂 Listener A';
+        }
+    }
+
+    function swapRoles() {
+        roleAIsSpeaker = !roleAIsSpeaker;
+        updateRolesUI();
+    }
+
+    function attachQuestionEvents() {
+        const questions = document.querySelectorAll('.question-item');
+        questions.forEach((q, index) => {
+            q.onclick = () => toggleQuestion(index);
+        });
+    }
+
+    function init() {
+        updateTimerDisplay();
+        attachQuestionEvents();
+        updateDotsUI();
+        updateRolesUI();
+        
+        startBtn.onclick = startTimer;
+        resetBtn.onclick = resetTimer;
+        swapBtn.onclick = swapRoles;
+        resetProgressBtn.onclick = resetProgress;
+    }
+
+    init();
+</script>
+</body>
+</html>
